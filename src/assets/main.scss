@@ -1,33 +1,64 @@
+@import url("https://use.typekit.net/ylx6upq.css");
+
 #app {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-
   font-weight: normal;
+  background-color: #ABD1C6;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
+* {
+  font-family: "proxima-nova", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+:root {
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    color: #001E1D;
   }
-}
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
+  h1 {
+    font-size: 3.5rem;
   }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+  h2 {
+    font-size: 3rem;
+  }
+  h3 {
+    font-size: 2rem;
+  }
+  h4 {
+    font-size: 1.125rem;
+  }
+  .btn {
+    --bs-btn-padding-x: 2rem;
+    --bs-btn-padding-y: 0.825rem;
+    margin: 0.125rem;
+    --bs-btn-border-width: 2px;
+    --bs-btn-font-size: 1.125rem;
+    --bs-btn-font-weight: 700;
+  }
+  .btn-primary {
+    --bs-border-radius: 0.1875rem;
+    --bs-btn-bg: #F9BC60;
+    --bs-btn-color: #001E1D;
+    --bs-btn-border-color: #F9BC60;
+    --bs-btn-hover-color: #001E1D;
+    --bs-btn-hover-bg: #ABD1C6;
+    --bs-btn-hover-border-color: #001E1D;
+  }
+  .btn-secondary {
+    --bs-border-radius: 0.1875rem;
+    --bs-btn-bg: #004643;
+    --bs-btn-color: #FFFFFF;
+    --bs-btn-border-color: #004643;
+    --bs-btn-hover-color: #001E1D;
+    --bs-btn-hover-bg: #F9BC60;
+    --bs-btn-hover-border-color: #001E1D;
+  }
+  .btn-link {
+    --bs-link-color: #001E1D;
+    --bs-link-hover-color: #F9BC60;
   }
 }
