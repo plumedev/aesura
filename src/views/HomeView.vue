@@ -1,9 +1,14 @@
 <script setup lang="ts">
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
+library.add(faArrowUp);
 </script>
 
 <template>
   <main>
-
+    <font-awesome-icon icon="fa-solid fa-arrow-up" />
     <h1>Headline 1</h1>
     <h2>Headline 2</h2>
     <h3>Headline 3</h3>
