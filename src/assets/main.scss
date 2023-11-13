@@ -14,7 +14,37 @@
   font-style: normal;
 }
 
-:root {
+.router-link {
+    font-weight: 700;
+    .svg-inline--fa {
+      color: #001E1D;
+    }
+    color: #001E1D;
+    &:hover {
+      color: #058075;
+      path {
+        fill: #F9BC60;
+        stroke: #001E1D;
+        stroke-width: 20;
+      }
+    }
+    &.router-link-active {
+      path {
+        stroke: #001E1D;
+        stroke-width: 20;
+        fill: #F9BC60;
+      }
+    }
+}
+
+.svg-inline--fa {
+  font-size: 1.25rem;
+  margin: 0 5px;
+}
+
+:root, [data-bs-theme=light] {
+  --bs-primary: #001E1D;
+  --bs-secondary: #F9BC60;
   h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
     color: #001E1D;
