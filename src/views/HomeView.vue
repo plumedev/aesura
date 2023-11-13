@@ -1,38 +1,64 @@
 <script setup lang="ts">
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faArrowUp);
+import DesignSystem from './DesignSystem.vue'
+
+library.add(faXmark)
 </script>
 
 <template>
-  <main>
-    <font-awesome-icon icon="fa-solid fa-arrow-up" />
-    <h1>Headline 1</h1>
-    <h2>Headline 2</h2>
-    <h3>Headline 3</h3>
-    <h4>Headline 4</h4>
-    <button type="button" class="btn btn-primary">Primary</button>
-    <button type="button" class="btn btn-secondary">Secondary</button>
-    <button type="button" class="btn btn-success">Success</button>
-    <button type="button" class="btn btn-danger">Danger</button>
-    <button type="button" class="btn btn-warning">Warning</button>
-    <button type="button" class="btn btn-info">Info</button>
-    <button type="button" class="btn btn-light">Light</button>
-    <button type="button" class="btn btn-dark">Dark</button>
+  <main class="d-flex justify-content-center align-items-center flex-column">
+    <p>
+      Il semblerait que vous n’ayez pas encore renseigné de dépenses/revenus récurrent(e)s.
+      Commencez dès maintenant !
+    </p>
 
-    <button type="button" class="btn btn-link">Link</button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#addTransactionForm"
+    >
+      Ajouter ma première transaction
+    </button>
 
-    <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Dropdown button
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">Action</a></li>
-    <li><a class="dropdown-item" href="#">Another action</a></li>
-    <li><a class="dropdown-item" href="#">Something else here</a></li>
-  </ul>
-</div>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="addTransactionForm"
+      tabindex="-1"
+      aria-labelledby="addTransactionFormLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="addTransactionFormLabel">Ajouter une transaction</h3>
+            <button
+              type="button"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              class="btn btn-link btn-sm"
+            >
+              <font-awesome-icon :icon="['fas', 'xmark']" />
+            </button>
+          </div>
+          <div class="modal-body">...</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
 </template>
+
+<style lang="scss">
+main {
+  min-height: calc(100vh - 92px);
+  max-width: 1140px;
+}
+</style>
