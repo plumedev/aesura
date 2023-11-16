@@ -1,0 +1,47 @@
+[
+  {
+    "id": "1",
+    "type": true,
+    "nom": "Netflix",
+    "date": "15/11/2023",
+    "récurrence": "Mensuel",
+    "compte_destination": "Revolut",
+    "montant": 12.99
+  },
+  {
+    "id": "2",
+    "type": false,
+    "nom": "Spotify",
+    "date": "18/11/2023",
+    "récurrence": "Mensuel",
+    "compte_destination": "Plutus",
+    "montant": 9.99
+  },
+  {
+    "id": "3",
+    "type": true,
+    "nom": "Amazon Prime Video",
+    "date": "20/11/2023",
+    "récurrence": "Annuel",
+    "compte_destination": "Revolut",
+    "montant": 99.99
+  },
+  {
+    "id": "4",
+    "type": false,
+    "nom": "Hulu",
+    "date": "22/11/2023",
+    "récurrence": "Mensuel",
+    "compte_destination": "Plutus",
+    "montant": 7.99
+  },
+  {
+    "id": "5",
+    "type": true,
+    "nom": "Disney+",
+    "date": "25/11/2023",
+    "récurrence": "Mensuel",
+    "compte_destination": "Revolut",
+    "montant": 8.99
+  }
+]
