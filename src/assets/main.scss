@@ -8,6 +8,11 @@
 $primary-color: #001e1d;
 $succes-color: #2CB67D;
 $danger-color: #E16162;
+$light-green: #ABD1C6;
+
+.text-light-green {
+  color: $light-green !important;
+}
 
 #app {
   min-width: 100vw;
