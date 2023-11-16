@@ -1,5 +1,14 @@
 @import url('https://use.typekit.net/ylx6upq.css');
 
+
+/**
+* Variables
+*/
+
+$primary-color: #001e1d;
+$succes-color: #2CB67D;
+$danger-color: #E16162;
+
 #app {
   min-width: 100vw;
   min-height: 100vh;
@@ -20,7 +29,7 @@
 
 :root,
 [data-bs-theme='light'] {
-  --bs-primary: #001e1d;
+  --bs-primary: $primary-color;
   --bs-secondary: #f9bc60;
   h1,
   h2,
@@ -29,7 +38,7 @@
   h5,
   h6 {
     font-weight: 700;
-    color: #001e1d;
+    color: $primary-color;
   }
   h1 {
     font-size: 3.5rem;
@@ -58,23 +67,23 @@
   .btn-primary {
     --bs-border-radius: 0.1875rem;
     --bs-btn-bg: #f9bc60;
-    --bs-btn-color: #001e1d;
+    --bs-btn-color: $primary-color;
     --bs-btn-border-color: #f9bc60;
-    --bs-btn-hover-color: #001e1d;
+    --bs-btn-hover-color: $primary-color;
     --bs-btn-hover-bg: #abd1c6;
-    --bs-btn-hover-border-color: #001e1d;
+    --bs-btn-hover-border-color: $primary-color;
   }
   .btn-secondary {
     --bs-border-radius: 0.1875rem;
     --bs-btn-bg: #004643;
     --bs-btn-color: #ffffff;
     --bs-btn-border-color: #004643;
-    --bs-btn-hover-color: #001e1d;
+    --bs-btn-hover-color: $primary-color;
     --bs-btn-hover-bg: #f9bc60;
-    --bs-btn-hover-border-color: #001e1d;
+    --bs-btn-hover-border-color: $primary-color;
   }
   .btn-link {
-    --bs-link-color: #001e1d;
+    --bs-link-color: $primary-color;
     --bs-link-hover-color: #f9bc60;
   }
 
@@ -88,6 +97,13 @@
       --bs-modal-border-width: 2px;
     }
   }
+
+  .card {
+    --bs-card-border-radius: 3px;
+    --bs-card-border-width : 0px;
+    --bs-card-bg: #004643;
+    --bs-card-color: #ffffff;
+  }
 }
 
 /**
@@ -98,25 +114,69 @@
   text-decoration: none;
   margin: 0px 7.5px;
   .svg-inline--fa {
-    color: #001e1d;
+    color: $primary-color;
     font-size: 1.5rem;
     margin: 0 5px;
   }
-  color: #001e1d;
+  color: $primary-color;
   &:hover {
     color: #058075;
     text-decoration: underline;
     path {
       fill: #f9bc60;
-      stroke: #001e1d;
+      stroke: $primary-color;
       stroke-width: 20;
     }
   }
   &.router-link-active {
     path {
-      stroke: #001e1d;
+      stroke: $primary-color;
       stroke-width: 20;
       fill: #f9bc60;
+    }
+  }
+}
+
+
+/**
+* HomeView.vue
+*/
+
+#month-selector {
+  line-height: 3rem;
+  i {
+    font-size: 3rem;
+  }
+}
+
+.transaction-item {
+  border: 2px $primary-color solid;
+  border-radius: 0.1875rem;
+  height: 54px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 6px;
+  margin-bottom: 1rem;
+  span {
+    font-weight: 700;
+  }
+  .type {
+    &.revenu {
+      display: block;
+      border: 2px $primary-color solid;
+      height: 28px;
+      width: 28px;
+      background-color: $succes-color;
+      border-radius: 28px;
+    }
+    &.depense {
+      display: block;
+      border: 2px $primary-color solid;
+      height: 28px;
+      width: 28px;
+      background-color: $danger-color;
+      border-radius: 28px;
     }
   }
 }
