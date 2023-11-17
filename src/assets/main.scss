@@ -1,14 +1,13 @@
 @import url('https://use.typekit.net/ylx6upq.css');
 
-
 /**
 * Variables
 */
 
 $primary-color: #001e1d;
-$succes-color: #2CB67D;
-$danger-color: #E16162;
-$light-green: #ABD1C6;
+$succes-color: #2cb67d;
+$danger-color: #e16162;
+$light-green: #abd1c6;
 
 .text-light-green {
   color: $light-green !important;
@@ -105,7 +104,7 @@ $light-green: #ABD1C6;
 
   .card {
     --bs-card-border-radius: 3px;
-    --bs-card-border-width : 0px;
+    --bs-card-border-width: 0px;
     --bs-card-bg: #004643;
     --bs-card-color: #ffffff;
   }
@@ -141,7 +140,6 @@ $light-green: #ABD1C6;
     }
   }
 }
-
 
 /**
 * HomeView.vue
