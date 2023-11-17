@@ -1,11 +1,11 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia'
 
-import transaction from "@/data/transactions.json"
+import transaction from '@/data/transactions.json'
 
-export const useTransactionStore = defineStore("TransactionStore", {
-    state: () => {
-        return {
-            transaction,
-        };
-    },
+export const useTransactionStore = defineStore('TransactionStore', {
+  state: () => {
+    return {
+      transaction
+    }
+  }
 })
