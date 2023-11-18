@@ -3,7 +3,9 @@ import HomeView from '../views/HomeView.vue'
 import DesignSystem from '../views/DesignSystem.vue';
 import RegisterViewVue from '../views/RegisterView.vue';
 import SignInViewVue from '../views/SignInView.vue';
+import HomePageViewVue from '../views/HomePageView.vue';
 import { getAuth, onAuthStateChanged, revokeAccessToken } from 'firebase/auth';
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,7 +13,18 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomePageViewVue
+    },
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/HomeView.vue'),
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/accounts',
@@ -30,7 +43,10 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/DesignSystem.vue')
+      component: () => import('../views/DesignSystem.vue'),
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/register',

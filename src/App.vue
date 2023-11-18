@@ -2,12 +2,12 @@
 import { onMounted, ref } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faTableColumns, faBuildingColumns, faSwatchbook } from '@fortawesome/free-solid-svg-icons'
+import { faTableColumns, faBuildingColumns, faSwatchbook, faRightFromBracket, faRightToBracket, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { getAuth, onAuthStateChanged, signOut, type Auth } from 'firebase/auth';
 import router from './router'
 
-library.add(faTableColumns, faBuildingColumns, faSwatchbook)
+library.add(faTableColumns, faBuildingColumns, faSwatchbook, faRightFromBracket, faRightToBracket, faUserPlus)
 
 const isLoggedIn = ref(false);
 let auth: Auth;
@@ -33,7 +33,7 @@ const handleSignOut = () => {
 <template>
   <header>
     <nav class="d-flex justify-content-center">
-      <RouterLink to="/" class="router-link link-offset-2 fw-bolder">
+      <RouterLink to="/dashboard" class="router-link link-offset-2 fw-bolder">
         <font-awesome-icon :icon="['fas', 'table-columns']" />
         Dashboard
       </RouterLink>
@@ -45,18 +45,20 @@ const handleSignOut = () => {
         <font-awesome-icon :icon="['fas', 'swatchbook']" />
         Design system
       </RouterLink>
-      <RouterLink to="/register" class="router-link link-offset-2 fw-bolder">
-        <font-awesome-icon :icon="['fas', 'swatchbook']" />
-        Register
-      </RouterLink>
-      <RouterLink to="/sign-in" class="router-link link-offset-2 fw-bolder">
-        <font-awesome-icon :icon="['fas', 'swatchbook']" />
-        Login
-      </RouterLink>
-      <button @click="handleSignOut" v-if="isLoggedIn" class="router-link link-offset-2 fw-bolder">
-        <font-awesome-icon :icon="['fas', 'swatchbook']" />
-        Sign out
-      </button>
+      <div class="right position-absolute top-10 end-0 pe-5">
+        <RouterLink to="/sign-in" v-if="!isLoggedIn" class="router-link link-offset-2 fw-bolder">
+          <font-awesome-icon :icon="['fas', 'right-to-bracket']" />
+          Login
+        </RouterLink>
+        <RouterLink to="/register" v-if="!isLoggedIn" class="router-link link-offset-2 fw-bolder">
+          <font-awesome-icon :icon="['fas', 'user-plus']" />
+          S'inscrire
+        </RouterLink>
+        <button @click="handleSignOut" v-if="isLoggedIn" class="router-link btn btn-link btn-xs link-offset-2 fw-bolder">
+          <font-awesome-icon :icon="['fas', 'right-from-bracket']" />
+          Se déconnecter
+        </button>
+      </div>
     </nav>
   </header>
 

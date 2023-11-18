@@ -67,6 +67,10 @@ $light-green: #abd1c6;
       --bs-btn-padding-x: 0.125rem;
       --bs-btn-padding-y: 0.125rem;
     }
+    &.btn-xs {
+      --bs-btn-padding-x: 0rem;
+      --bs-btn-padding-y: 0rem;
+    }
   }
   .btn-primary {
     --bs-border-radius: 0.1875rem;
