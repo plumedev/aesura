@@ -1,13 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap'
-import './assets/main.scss'
-
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
-
-import App from './App.vue'
-import router from './router'
-
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
@@ -27,11 +17,5 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const firebase = initializeApp(firebaseConfig);
-
-const app = createApp(App)
-
-app.use(createPinia())
-app.use(router)
-
-app.mount('#app')
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
