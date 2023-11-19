@@ -33,19 +33,21 @@ const handleSignOut = () => {
 <template>
   <header>
     <nav class="d-flex justify-content-center">
-      <RouterLink to="/dashboard" class="router-link link-offset-2 fw-bolder">
-        <font-awesome-icon :icon="['fas', 'table-columns']" />
-        Dashboard
-      </RouterLink>
-      <RouterLink to="/accounts" class="router-link link-offset-2 fw-bolder">
-        <font-awesome-icon :icon="['fas', 'building-columns']" />
-        Comptes
-      </RouterLink>
-      <RouterLink to="/design-system" class="router-link link-offset-2 fw-bolder">
-        <font-awesome-icon :icon="['fas', 'swatchbook']" />
-        Design system
-      </RouterLink>
-      <div class="right position-absolute top-10 end-0 pe-5">
+      <div v-if="isLoggedIn" class="menu">
+        <RouterLink to="/dashboard" class="router-link link-offset-2 fw-bolder">
+          <font-awesome-icon :icon="['fas', 'table-columns']" />
+          Dashboard
+        </RouterLink>
+        <RouterLink to="/accounts" class="router-link link-offset-2 fw-bolder">
+          <font-awesome-icon :icon="['fas', 'building-columns']" />
+          Comptes
+        </RouterLink>
+        <RouterLink to="/design-system" class="router-link link-offset-2 fw-bolder">
+          <font-awesome-icon :icon="['fas', 'swatchbook']" />
+          Design system
+        </RouterLink>
+      </div>
+      <div id="user-hub" class="position-absolute-md top-10 end-0 pe-5 mb-3 d-flex">
         <RouterLink to="/sign-in" v-if="!isLoggedIn" class="router-link link-offset-2 fw-bolder">
           <font-awesome-icon :icon="['fas', 'right-to-bracket']" />
           Login
