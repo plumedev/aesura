@@ -1,4 +1,5 @@
 @import url('https://use.typekit.net/ylx6upq.css');
+@import url('/src/assets/variables.scss');
 
 /**
 * Variables
@@ -18,6 +19,12 @@ $light-green: #abd1c6;
   min-height: 100vh;
   background-color: #abd1c6;
   padding: 2rem;
+}
+
+.site {
+  display: flex;
+  flex-direction: column;
+  -min-height: calc(100vh - 160px);
 }
 
 * {
@@ -59,10 +66,11 @@ $light-green: #abd1c6;
   .btn {
     --bs-btn-padding-x: 2rem;
     --bs-btn-padding-y: 0.825rem;
-    margin: 0.125rem;
+    --bs-btn-active-bg: $primary-color;
     --bs-btn-border-width: 2px;
     --bs-btn-font-size: 1.125rem;
     --bs-btn-font-weight: 700;
+    margin: 0.125rem;
     &.btn-sm {
       --bs-btn-padding-x: 0.125rem;
       --bs-btn-padding-y: 0.125rem;
@@ -111,6 +119,41 @@ $light-green: #abd1c6;
     --bs-card-border-width: 0px;
     --bs-card-bg: #004643;
     --bs-card-color: #ffffff;
+  }
+  .input-group {
+    min-height: 64px;
+    border: none;
+    background: unset;
+    min-width: 250px;
+    &:focus-within {
+        [class^="input-group-"] {
+          transition: all 0.125s ease-in-out;
+        color: #f9bc60;
+      }
+      ::placeholder {
+        color: #abd1c6;
+      }
+    }
+    [class^="input-group-"] {
+      background-color: #004643;
+      border: none;
+      color: #abd1c6;
+      border-radius: 0.1875rem;
+    }
+    .form-control {
+      border-radius: 0.1875rem;
+      background-color: #004643;
+      font-weight: bold;
+      font-size: 0.875rem;
+      border: unset;
+      color: #FFFFFF;
+      &:focus {
+        box-shadow: unset;
+      }
+    }
+    ::placeholder {
+      color: #fff;
+    }
   }
 }
 
