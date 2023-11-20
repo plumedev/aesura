@@ -42,7 +42,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { 
+    getAuth, 
+    signInWithEmailAndPassword, 
+    GoogleAuthProvider, 
+    signInWithPopup } from "firebase/auth";
 import { useRouter } from 'vue-router';
 import router from '@/router';
 
@@ -86,7 +90,15 @@ const register = () =>  {
 };
 
 const signInWithGoogle = () => {
-
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(getAuth(), provider)
+        .then((result) => {
+            console.log(result.user);
+            router.push("/");
+        })
+        .catch((error) => {
+            console.log(error.message)
+        })
 }
 
 </script>

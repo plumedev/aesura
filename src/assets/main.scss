@@ -70,6 +70,8 @@ $light-green: #abd1c6;
     --bs-btn-border-width: 2px;
     --bs-btn-font-size: 1.125rem;
     --bs-btn-font-weight: 700;
+    --bs-btn-active-border-color: #f9bc60;
+    --bs-btn-active-color: $primary-color
     margin: 0.125rem;
     &.btn-sm {
       --bs-btn-padding-x: 0.125rem;
