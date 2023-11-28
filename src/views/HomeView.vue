@@ -5,14 +5,32 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faXmark, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 library.add(faXmark, faArrowLeft, faArrowRight)
-
 /** Data */
+import { useFirestore, useCollection } from 'vuefire'
+import { collection, addDoc} from 'firebase/firestore';
 import transactions from '@/data/transactions.json'
 /** Component */
 import statChart from '@/components/statChart.vue'
-
 /** Utils */
 import { getRevenus, getDepenses } from '@/utils/transactionUtils'
+
+  const db = useFirestore();
+  const transactionsCollection = useCollection(collection(db, 'transactions'));
+  
+  const newTransaction = ref({
+    name: '',
+    amount: 0,
+    isAnIncome: false,
+    frequency: ''
+  })
+
+  async function addTransaction() {
+    const newDoc = addDoc(collection(db, "transactions"), {
+      ...newTransaction.value
+    });
+    console.log(newDoc);
+  }
+
 </script>
 
 <template>
@@ -21,22 +39,22 @@ import { getRevenus, getDepenses } from '@/utils/transactionUtils'
       <div class="row">
         <div class="col-4">
           <h2 class="text-center">Revenus</h2>
-          <div class="transaction-item" v-for="revenu in getRevenus()" :key="revenu.id">
-            <span class="type revenu"> </span>
+          <div class="transaction-item" v-for="transaction in transactionsCollection.filter(t => t.isAnIncome)" :key="transaction.name">
+            <span class="type" :class="transaction.isAnIncome ? 'revenu' : 'depense'"></span>
             <span class="name">
-              {{ revenu.nom }}
+              {{ transaction.name }}
             </span>
-            <span class="amount"> {{ revenu.montant }}€ </span>
+            <span class="amount"> {{ transaction.amount }}€ </span>
           </div>
         </div>
         <div class="col-4">
           <h2 class="text-center">Dépenses</h2>
-          <div class="transaction-item" v-for="depense in getDepenses()" :key="depense.id">
-            <span class="type depense"> </span>
+          <div class="transaction-item" v-for="transaction in transactionsCollection.filter(t => !t.isAnIncome)" :key="transaction.name">
+            <span class="type" :class="transaction.isAnIncome ? 'revenu' : 'depense'"></span>
             <span class="name">
-              {{ depense.nom }}
+              {{ transaction.name }}
             </span>
-            <span class="amount"> {{ depense.montant }}€ </span>
+            <span class="amount"> {{ transaction.amount }}€ </span>
           </div>
         </div>
         <div class="col-4">
