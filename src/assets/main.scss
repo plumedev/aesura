@@ -116,6 +116,29 @@ $light-green: #abd1c6;
     }
   }
 
+  .form-switch {
+    .form-check-input {
+      --bs-form-check-bg: $light-green;
+      --bs-form-switch-bg:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23001E1D'/%3e%3c/svg%3e");
+      border-color: #001E1D;
+      border-width: 2px;
+      height: 1.5rem;
+      width: 3rem;
+      box-shadow: unset;
+      &:checked {
+        --bs-form-switch-bg:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23E8E4E6'/%3e%3c/svg%3e");
+        background-color: #f9bc60;
+        border-color: #f9bc60;
+      }
+    }
+  }
+
+  .form-select {
+    width: 100%;
+    --bs-border-radius-lg: 3px;
+    min-height: 64px;
+  }
+
   .card {
     --bs-card-border-radius: 3px;
     --bs-card-border-width: 0px;
@@ -126,7 +149,7 @@ $light-green: #abd1c6;
     min-height: 64px;
     border: none;
     background: unset;
-    min-width: 250px;
+    width: 100%;
     &:focus-within {
         [class^="input-group-"] {
           transition: all 0.125s ease-in-out;
@@ -233,3 +256,31 @@ $light-green: #abd1c6;
     }
   }
 }
+
+.bigger-transparent {
+  border: unset;
+  background-color: unset;
+  font-size: 3.5rem;
+  text-align: center;
+  width: 100%;
+  &:focus {
+    outline: none;
+  }
+  &::placeholder {
+    opacity: 0.25;
+    color: #001E1D;
+  }
+}
+
+/* Pour les navigateurs basés sur WebKit comme Chrome, Safari, etc. */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Pour Mozilla Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
