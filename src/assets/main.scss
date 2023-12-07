@@ -15,7 +15,6 @@ $light-green: #abd1c6;
 }
 
 #app {
-  min-width: 100vw;
   min-height: 100vh;
   background-color: #abd1c6;
   padding: 2rem;
@@ -24,7 +23,7 @@ $light-green: #abd1c6;
 .site {
   display: flex;
   flex-direction: column;
-  -min-height: calc(100vh - 160px);
+  min-height: calc(100vh - 160px);
 }
 
 * {
@@ -42,6 +41,7 @@ $light-green: #abd1c6;
 [data-bs-theme='light'] {
   --bs-primary: $primary-color;
   --bs-secondary: #f9bc60;
+  --bs-danger-rgb: 225, 97, 98;;
   h1,
   h2,
   h3,
@@ -116,6 +116,34 @@ $light-green: #abd1c6;
     }
   }
 
+  .form-switch {
+    .form-check-input {
+      --bs-form-check-bg: $light-green;
+      --bs-form-switch-bg:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23001E1D'/%3e%3c/svg%3e");
+      border-color: #001E1D;
+      border-width: 2px;
+      height: 1.5rem;
+      width: 3rem;
+      box-shadow: unset;
+      &:checked {
+        --bs-form-switch-bg:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23E8E4E6'/%3e%3c/svg%3e");
+        background-color: #f9bc60;
+        border-color: #f9bc60;
+      }
+    }
+  }
+
+  .form-select {
+    width: 100%;
+    --bs-border-radius-lg: 3px;
+    --bs-border-color: transparent;
+    min-height: 64px;
+    background-color: #004643;
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+
   .card {
     --bs-card-border-radius: 3px;
     --bs-card-border-width: 0px;
@@ -126,7 +154,7 @@ $light-green: #abd1c6;
     min-height: 64px;
     border: none;
     background: unset;
-    min-width: 250px;
+    width: 100%;
     &:focus-within {
         [class^="input-group-"] {
           transition: all 0.125s ease-in-out;
@@ -155,6 +183,12 @@ $light-green: #abd1c6;
     }
     ::placeholder {
       color: #fff;
+    }
+  }
+  .error {
+    svg {
+      fill: $danger-color;
+      color: $danger-color;
     }
   }
 }
@@ -233,3 +267,32 @@ $light-green: #abd1c6;
     }
   }
 }
+
+.bigger-transparent {
+  border: unset;
+  background-color: unset;
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-align: center;
+  width: 100%;
+  &:focus {
+    outline: none;
+  }
+  &::placeholder {
+    opacity: 0.25;
+    color: #001E1D;
+  }
+}
+
+/* Pour les navigateurs basés sur WebKit comme Chrome, Safari, etc. */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Pour Mozilla Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
