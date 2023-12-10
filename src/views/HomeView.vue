@@ -11,6 +11,8 @@ import { collection, addDoc} from 'firebase/firestore';
 import transactions from '@/data/transactions.json'
 /** Component */
 import statChart from '@/components/statChart.vue';
+import { Modal } from 'bootstrap';
+
 
 
   const db = useFirestore();
@@ -26,7 +28,7 @@ import statChart from '@/components/statChart.vue';
 
   let showError = ref(false);
 
-  async function addTransaction() {
+  async function addTransaction()  {
     if( newTransaction.value.name != '' &&
         newTransaction.value.amount != '' &&
         newTransaction.value.frequency != '' &&
@@ -35,9 +37,26 @@ import statChart from '@/components/statChart.vue';
         ...newTransaction.value
       });
       showError.value = false;
+      
+      const modalElement = document.getElementById('addTransactionModal');
+      
+      if (modalElement) {
+          const modalInstance = Modal.getInstance(modalElement);
+          if (modalInstance) {
+              modalInstance.hide();
+          }
+      }
     } else {
       showError.value = true;
     }
+  }
+
+  function cleanForm() {
+    newTransaction.value.name = '';
+    newTransaction.value.amount = '';
+    newTransaction.value.isAnIncome = false;
+    newTransaction.value.frequency = '0';
+    newTransaction.value.date = '';
   }
 
 </script>
@@ -47,7 +66,7 @@ import statChart from '@/components/statChart.vue';
     <div id="transactions-list" class="w-100" v-if="transactions.length > 0">
       <div class="row">
         <div class="col-4">
-          <h2 class="text-center">Revenus</h2>
+          <h2 class="text-center mb-3">Revenus</h2>
           <div class="transaction-item" v-for="transaction in transactionsCollection.filter(t => t.isAnIncome)" :key="transaction.name">
             <span class="type" :class="transaction.isAnIncome ? 'revenu' : 'depense'"></span>
             <span class="name">
@@ -57,7 +76,7 @@ import statChart from '@/components/statChart.vue';
           </div>
         </div>
         <div class="col-4">
-          <h2 class="text-center">Dépenses</h2>
+          <h2 class="text-center mb-3">Dépenses</h2>
           <div class="transaction-item" v-for="transaction in transactionsCollection.filter(t => !t.isAnIncome)" :key="transaction.name">
             <span class="type" :class="transaction.isAnIncome ? 'revenu' : 'depense'"></span>
             <span class="name">
@@ -67,16 +86,22 @@ import statChart from '@/components/statChart.vue';
           </div>
         </div>
         <div class="col-4">
+          <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+              <button type="button" 
+                      class="btn btn-primary mb-3" 
+                      data-bs-toggle="modal" 
+                      data-bs-target="#addTransactionModal"
+                      @click="cleanForm"
+              >
+                Ajouter une transaction
+              </button>
+            </div>
+          </div>
           <statChart />
         </div>
       </div>
-      <div class="row">
-        <div class="col-12 d-flex justify-content-center">
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTransactionModal">
-            Ajouter une transaction
-          </button>
-        </div>
-      </div>
+
     </div>
 
     <div v-else>

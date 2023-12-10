@@ -7,8 +7,7 @@ import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 library.add(faArrowLeft, faArrowRight)
 /** Utils */
 import { getRevenus, getDepenses } from '@/utils/transactionUtils'
-/** Data */
-import transactions from '@/data/transactions.json'
+
 /** Vue chart.js */
 import { BarChart } from 'vue-chart-3'
 import { Chart, registerables } from 'chart.js'
@@ -90,7 +89,7 @@ const options = ref({
 </script>
 
 <template>
-  <div class="card w-100 h-100" style="width: 18rem">
+  <div class="card w-100" style="width: 18rem">
     <div class="card-body d-flex flex-column align-items-center">
       <div id="month-selector" class="d-flex align-items-center justify-content-evenly">
         <font-awesome-icon :icon="['fas', 'arrow-left']" />
