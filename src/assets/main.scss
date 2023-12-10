@@ -15,7 +15,6 @@ $light-green: #abd1c6;
 }
 
 #app {
-  min-width: 100vw;
   min-height: 100vh;
   background-color: #abd1c6;
   padding: 2rem;
@@ -24,7 +23,7 @@ $light-green: #abd1c6;
 .site {
   display: flex;
   flex-direction: column;
-  -min-height: calc(100vh - 160px);
+  min-height: calc(100vh - 160px);
 }
 
 * {
@@ -42,6 +41,7 @@ $light-green: #abd1c6;
 [data-bs-theme='light'] {
   --bs-primary: $primary-color;
   --bs-secondary: #f9bc60;
+  --bs-danger-rgb: 225, 97, 98;;
   h1,
   h2,
   h3,
@@ -136,7 +136,12 @@ $light-green: #abd1c6;
   .form-select {
     width: 100%;
     --bs-border-radius-lg: 3px;
+    --bs-border-color: transparent;
     min-height: 64px;
+    background-color: #004643;
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 700;
   }
 
   .card {
@@ -178,6 +183,12 @@ $light-green: #abd1c6;
     }
     ::placeholder {
       color: #fff;
+    }
+  }
+  .error {
+    svg {
+      fill: $danger-color;
+      color: $danger-color;
     }
   }
 }
@@ -261,6 +272,7 @@ $light-green: #abd1c6;
   border: unset;
   background-color: unset;
   font-size: 3.5rem;
+  font-weight: 700;
   text-align: center;
   width: 100%;
   &:focus {

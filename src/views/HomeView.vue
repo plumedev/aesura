@@ -20,15 +20,24 @@ import statChart from '@/components/statChart.vue';
     name: '',
     amount: '',
     isAnIncome: false,
-    frequency: '',
+    frequency: '0',
     date: ''
   })
 
+  let showError = ref(false);
+
   async function addTransaction() {
-    const newDoc = addDoc(collection(db, "transactions"), {
-      ...newTransaction.value
-    });
-    console.log(newDoc);
+    if( newTransaction.value.name != '' &&
+        newTransaction.value.amount != '' &&
+        newTransaction.value.frequency != '' &&
+        newTransaction.value.date != '' ) {
+      const newDoc = addDoc(collection(db, "transactions"), {
+        ...newTransaction.value
+      });
+      showError.value = false;
+    } else {
+      showError.value = true;
+    }
   }
 
 </script>
@@ -106,20 +115,29 @@ import statChart from '@/components/statChart.vue';
                 >
                 <label class="form-check-label fw-bold" for="flexSwitchCheckDefault">Cette transaction est un revenu</label>
               </div>
+              <div class="input-group-label d-flex justify-content-between">
+                <label class="fw-bold" for="name">Nom</label>
+                <div v-if="!newTransaction.name && showError" class="text-danger fw-bold text-end mb-1">Veuillez renseigner un nom</div>
+              </div>
               <div class="input-group mb-3">
-                <span class="input-group-text" id="at-icon">
+                <span class="input-group-text" :class="{ error: !newTransaction.name && showError }" id="at-icon">
                   <font-awesome-icon :icon="['fa', 'font']" />
                 </span>
                 <input  type="text"
                         class="form-control"
-                        placeholder="Nom"
+                        placeholder="Ex: Spotify"
                         aria-label="Nom"
                         aria-describedby="font-icon"
                         v-model="newTransaction.name"
+                        id="name"
                 >
               </div>
+              <div class="input-group-label d-flex justify-content-between">
+                <label class="fw-bold" for="date">Date</label>
+                <div v-if="!newTransaction.date && showError" class="text-danger fw-bold text-end mb-1">Veuillez renseigner un date</div>
+              </div>
               <div class="input-group mb-3">
-                <span class="input-group-text" id="at-icon">
+                <span class="input-group-text" :class="{ error: !newTransaction.name && showError }" id="at-icon">
                   <font-awesome-icon :icon="['fa', 'calendar']" />
                 </span>
                 <input  type="date"
@@ -128,13 +146,14 @@ import statChart from '@/components/statChart.vue';
                         aria-label="Montant"
                         aria-describedby="font-calendar"
                         v-model="newTransaction.date"
+                        id="date"
                 >
               </div>
               <select class="form-select form-select-lg mb-3" 
                       aria-label="Large select example"
                       v-model="newTransaction.frequency"
               >
-                <option default>Pas de répétition</option>
+                <option value="0" selected>Pas de répétition</option>
                 <option value="1">Quotidienne</option>
                 <option value="2">Hebdomadaire</option>
                 <option value="3">Mensuelle</option>
@@ -144,8 +163,11 @@ import statChart from '@/components/statChart.vue';
             </div>
             <div class="col-5 offset-1 d-flex flex-column align-items-center justify-content-center">
               <h3>Montant</h3>
+              <div class="input-group-label">
+                <div v-if="!newTransaction.amount && showError" class="text-danger fw-bold text-end mb-1">Veuillez renseigner un montant</div>
+              </div>
               <input class="bigger-transparent" type="number" name="" id="" placeholder="XX€" v-model="newTransaction.amount">
-              <button type="button" @click="addTransaction" class="btn btn-primary">Save changes</button>
+              <button type="button" @click="addTransaction" class="btn btn-primary">Ajouter</button>
             </div>
           </div>
         </form>
