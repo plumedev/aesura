@@ -239,12 +239,14 @@ $light-green: #abd1c6;
   border: 2px $primary-color solid;
   border-radius: 0.1875rem;
   height: 54px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 12px 6px;
   margin-bottom: 1rem;
   max-width: 320px;
+  .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   span {
     font-weight: 700;
   }

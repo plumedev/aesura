@@ -12,6 +12,7 @@ import transactions from '@/data/transactions.json'
 /** Component */
 import statChart from '@/components/statChart.vue';
 import { Modal } from 'bootstrap';
+import TransactionItem from '@/components/TransactionItem.vue';
 
 
 
@@ -67,23 +68,15 @@ import { Modal } from 'bootstrap';
       <div class="row">
         <div class="col-4">
           <h2 class="text-center mb-3">Revenus</h2>
-          <div class="transaction-item" v-for="transaction in transactionsCollection.filter(t => t.isAnIncome)" :key="transaction.name">
-            <span class="type" :class="transaction.isAnIncome ? 'revenu' : 'depense'"></span>
-            <span class="name">
-              {{ transaction.name }}
-            </span>
-            <span class="amount"> {{ transaction.amount }}€ </span>
-          </div>
+          <TransactionItem v-for="transaction in transactionsCollection.filter(t => t.isAnIncome)" 
+               :key="transaction.name"
+               :transaction="transaction" />
         </div>
         <div class="col-4">
           <h2 class="text-center mb-3">Dépenses</h2>
-          <div class="transaction-item" v-for="transaction in transactionsCollection.filter(t => !t.isAnIncome)" :key="transaction.name">
-            <span class="type" :class="transaction.isAnIncome ? 'revenu' : 'depense'"></span>
-            <span class="name">
-              {{ transaction.name }}
-            </span>
-            <span class="amount"> {{ transaction.amount }}€ </span>
-          </div>
+          <TransactionItem v-for="transaction in transactionsCollection.filter(t => !t.isAnIncome)" 
+               :key="transaction.name"
+               :transaction="transaction" />
         </div>
         <div class="col-4">
           <div class="row">
