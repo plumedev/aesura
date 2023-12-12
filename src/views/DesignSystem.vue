@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-library.add(faArrowUp)
-
-
+import { faPenToSquare, faTrash, faArrowUp } from '@fortawesome/free-solid-svg-icons'
+library.add(faPenToSquare, faTrash, faArrowUp)
 </script>
 
 <template>
@@ -25,6 +23,11 @@ library.add(faArrowUp)
       </div>
       <div class="col-2">
         <button type="button" class="btn btn-link">Link</button>
+      </div>
+      <div class="col-2">
+        <button type="button" class="btn btn-icon">
+          <font-awesome-icon :icon="['fa', 'pen-to-square']" />
+        </button>
       </div>
       <div class="col-2">
         <button type="button" class="btn btn-primary btn-sm">Btn w/ minimum padding</button>
