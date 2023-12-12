@@ -5,8 +5,6 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 library.add(faPenToSquare, faTrash)
 
-import ModalEditTransaction from './ModalEditTransaction.vue';
-
 const props = defineProps({
     transaction: {
         type: Object,
@@ -24,8 +22,18 @@ const props = defineProps({
             <span class="amount">{{ transaction.amount }}€</span>
         </div>
         <div class="actions">
-            <modalEditTransaction/>
-            <font-awesome-icon :icon="['fa', 'trash']" />
+            <button type="button" 
+                    class="btn btn-icon btn-sm" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#editTransactionModal"
+                    @click="$emit('editTransaction')">
+                <font-awesome-icon :icon="['fa', 'pen-to-square']" />
+            </button>
+            <button type="button" 
+                    class="btn btn-icon btn-sm" 
+                    @click="$emit('deleteTransaction')">
+                <font-awesome-icon :icon="['fa', 'trash']"  />
+            </button>
         </div>
     </div>
 </template>

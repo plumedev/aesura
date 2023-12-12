@@ -7,12 +7,21 @@ import { faXmark, faArrowLeft, faArrowRight, faFont, faCalendar } from '@fortawe
 library.add(faXmark, faArrowLeft, faArrowRight, faFont, faCalendar)
 /** Data */
 import { useFirestore, useCollection, useDocument } from 'vuefire';
-import { collection, addDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { collection, addDoc, doc, getDoc, updateDoc, deleteDoc } from 'firebase/firestore';
 import transactions from '@/data/transactions.json'
 /** Component */
 import statChart from '@/components/statChart.vue';
 import { Modal } from 'bootstrap';
 import TransactionItem from '@/components/TransactionItem.vue';
+
+  interface Transaction {
+    name: string;
+    amount: string;
+    isAnIncome: boolean;
+    frequency: string;
+    date: string;
+    id: string;
+  }
 
   let showError = ref(false);
   let currentTransactionId: string;
@@ -20,59 +29,14 @@ import TransactionItem from '@/components/TransactionItem.vue';
   const db = useFirestore();
   const transactionsCollection = useCollection(collection(db, 'transactions'));  
 
-  const newTransaction = ref<{ 
-  name: string; 
-  amount: string; 
-  isAnIncome: boolean; 
-  frequency: string; 
-  date: string; 
-  id: string; 
-}>({
-  name: '',
-  amount: '',
-  isAnIncome: false,
-  frequency: '0',
-  date: '',
-  id: ''
-});
-
-  async function editTransaction(id: string) {
-    currentTransactionId = id;
-    const docRef = doc(db, 'transactions', currentTransactionId);
-    const docSnap = await getDoc(docRef);
-  
-    if (docSnap.exists()) {
-      newTransaction.value = { 
-        id,
-        name: newTransaction.value.name || '',
-        amount: newTransaction.value.amount || '',
-        isAnIncome: newTransaction.value.isAnIncome || false,
-        frequency: newTransaction.value.frequency || '',
-        date: newTransaction.value.date || '',
-        ...docSnap.data() };
-    } else {
-      console.log("No such document!");
-    }
-    return id
-  }
-
-  async function updateTransaction() {
-    const docRef = doc(db, 'transactions', currentTransactionId);
-    await updateDoc(docRef, {
-      ...newTransaction.value
-    });
-    const modalElement = document.getElementById('editTransactionModal');
-      
-      if (modalElement) {
-          const modalInstance = Modal.getInstance(modalElement);
-          if (modalInstance) {
-              modalInstance.hide();
-          }
-      }
-
-  }
-
-
+  const newTransaction = ref<Transaction>({
+    name: '',
+    amount: '',
+    isAnIncome: false,
+    frequency: '0',
+    date: '',
+    id: ''
+  });
 
   async function addTransaction()  {
     if( newTransaction.value.name != '' &&
@@ -97,7 +61,44 @@ import TransactionItem from '@/components/TransactionItem.vue';
     }
   }
 
+  async function editTransaction(id: string) {
+    currentTransactionId = id;
+    const docRef = doc(db, 'transactions', currentTransactionId);
+    const docSnap = await getDoc(docRef);
+  
+    if (docSnap.exists()) {
+      newTransaction.value = { 
+        id,
+        name: newTransaction.value.name || '',
+        amount: newTransaction.value.amount || '',
+        isAnIncome: newTransaction.value.isAnIncome || false,
+        frequency: newTransaction.value.frequency || '',
+        date: newTransaction.value.date || '',
+        ...docSnap.data() };
+    } else {
+      console.log("Cette transaction n'existe pas !");
+    }
+    return id
+  }
 
+  async function updateTransaction() {
+    const docRef = doc(db, 'transactions', currentTransactionId);
+    await updateDoc(docRef, {
+      ...newTransaction.value
+    });
+
+    const modalElement = document.getElementById('editTransactionModal');
+    if (modalElement) {
+        const modalInstance = Modal.getInstance(modalElement);
+        if (modalInstance) {
+            modalInstance.hide();
+        }
+    }
+  }
+
+  async function deleteTransaction(id: string) {
+    await deleteDoc(doc(db, 'transactions',  id))
+  }
 
   function cleanForm() {
     newTransaction.value.name = '';
@@ -106,10 +107,6 @@ import TransactionItem from '@/components/TransactionItem.vue';
     newTransaction.value.frequency = '0';
     newTransaction.value.date = '';
   }
-
-
-
-
 </script>
 
 <template>
@@ -121,7 +118,8 @@ import TransactionItem from '@/components/TransactionItem.vue';
           <TransactionItem v-for="transaction in transactionsCollection.filter(t => t.isAnIncome)" 
               :key="transaction.name"
               :transaction="transaction"
-              @click="editTransaction(transaction.id)"
+              @edit-transaction="editTransaction(transaction.id)"
+              @delete-transaction="deleteTransaction(transaction.id)"
                 />
         </div>
         <div class="col-4">
@@ -129,7 +127,8 @@ import TransactionItem from '@/components/TransactionItem.vue';
           <TransactionItem v-for="transaction in transactionsCollection.filter(t => !t.isAnIncome)" 
               :key="transaction.name"
               :transaction="transaction"
-              @click="editTransaction(transaction.id)"/>
+              @edit-transaction="editTransaction(transaction.id)"
+              @delete-transaction="deleteTransaction(transaction.id)"/>
         </div>
         <div class="col-4">
           <div class="row">
