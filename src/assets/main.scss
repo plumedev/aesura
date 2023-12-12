@@ -298,3 +298,19 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+
+
+.svg-inline--fa {
+  color: $primary-color;
+  font-size: 1.5rem;
+  margin: 0 5px;
+  &:hover {
+    color: #058075;
+    text-decoration: underline;
+    path {
+      fill: #f9bc60;
+      stroke: $primary-color;
+      stroke-width: 20;
+    }
+  }
+}
