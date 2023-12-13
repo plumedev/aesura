@@ -1,53 +1,6 @@
-<template>
-    <div class="logo">
-        <img src="@/assets/images/logo-aesura.png" alt="" srcset="">
-    </div>
-    <div class="site">
-        <div id="form" class="col-md-5 col-12 sign-in d-flex flex-column text-center">
-            <h1 class="mb-5">Se connecter</h1>
-            <p v-if="errMsg" class="text-danger fw-bold">{{ errMsg }}</p>
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="at-icon">
-                    <font-awesome-icon :icon="['fas', 'at']" />
-                </span>
-                <input  type="text"
-                        class="form-control"
-                        placeholder="Email"
-                        aria-label="Email"
-                        aria-describedby="at-icon"
-                        v-model="email"
-                >
-            </div>
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="lock-icon">
-                    <font-awesome-icon :icon="['fas', 'lock']" />
-                </span>
-                <input  type="password"
-                        class="form-control"
-                        placeholder="Password"
-                        aria-label="Password"
-                        aria-describedby="lock-icon"
-                        v-model="password"
-                >
-            </div>
-            <button class="btn btn-primary" @click="register">Se connecter</button>
-            <h3 class="m-3">Ou</h3>
-            <button class="btn btn-primary" @click="signInWithGoogle">
-                <font-awesome-icon :icon="['fab', 'google']" />
-                se connecter avec Google
-            </button>
-        </div>
-    </div>
-</template>
-
 <script setup lang="ts">
 import { ref } from 'vue';
-import { 
-    getAuth, 
-    signInWithEmailAndPassword, 
-    GoogleAuthProvider, 
-    signInWithPopup } from "firebase/auth";
-import { useRouter } from 'vue-router';
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import router from '@/router';
 
 /**  Font Awesome */
@@ -101,6 +54,48 @@ const signInWithGoogle = () => {
 }
 
 </script>
+
+<template>
+    <div class="logo">
+        <img src="@/assets/images/logo-aesura.png" alt="" srcset="">
+    </div>
+    <div class="site">
+        <div id="form" class="col-md-5 col-12 sign-in d-flex flex-column text-center">
+            <h1 class="mb-5">Se connecter</h1>
+            <p v-if="errMsg" class="text-danger fw-bold">{{ errMsg }}</p>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="at-icon">
+                    <font-awesome-icon :icon="['fas', 'at']" />
+                </span>
+                <input  type="text"
+                        class="form-control"
+                        placeholder="Email"
+                        aria-label="Email"
+                        aria-describedby="at-icon"
+                        v-model="email"
+                >
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="lock-icon">
+                    <font-awesome-icon :icon="['fas', 'lock']" />
+                </span>
+                <input  type="password"
+                        class="form-control"
+                        placeholder="Password"
+                        aria-label="Password"
+                        aria-describedby="lock-icon"
+                        v-model="password"
+                >
+            </div>
+            <button class="btn btn-primary" @click="register">Se connecter</button>
+            <h3 class="m-3">Ou</h3>
+            <button class="btn btn-primary" @click="signInWithGoogle">
+                <font-awesome-icon :icon="['fab', 'google']" />
+                se connecter avec Google
+            </button>
+        </div>
+    </div>
+</template>
 
 <style lang="scss">
 
