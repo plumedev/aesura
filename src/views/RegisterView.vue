@@ -43,14 +43,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, type Ref } from 'vue';
 import { 
     getAuth,
     createUserWithEmailAndPassword,
     GoogleAuthProvider,
     signInWithPopup
 } from "firebase/auth";
-import { useRouter } from 'vue-router';
 import router from '@/router';
 
 /**  Font Awesome */
@@ -60,8 +59,8 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faAt, faLock } from '@fortawesome/free-solid-svg-icons'
 library.add(faAt, faLock, faGoogle )
 
-const email = ref('')
-const password = ref('')
+const email: Ref<string> = ref('')
+const password: Ref<string> = ref('')
 
 const register = () =>  {
     const auth = getAuth();
