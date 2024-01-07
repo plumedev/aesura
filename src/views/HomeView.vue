@@ -1,18 +1,24 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-/**  Font Awesome */
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faXmark, faArrowLeft, faArrowRight, faFont, faCalendar } from '@fortawesome/free-solid-svg-icons'
-library.add(faXmark, faArrowLeft, faArrowRight, faFont, faCalendar)
-/** Data */
-import { useFirestore, useCollection, useDocument } from 'vuefire';
-import { collection, addDoc, doc, getDoc, updateDoc, deleteDoc } from 'firebase/firestore';
-import transactions from '@/data/transactions.json'
-/** Component */
-import statChart from '@/components/statChart.vue';
-import { Modal } from 'bootstrap';
-import TransactionItem from '@/components/TransactionItem.vue';
+  import { ref } from 'vue'
+  /**  Font Awesome */
+  import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+  import { library } from '@fortawesome/fontawesome-svg-core'
+  import { faXmark, faArrowLeft, faArrowRight, faFont, faCalendar } from '@fortawesome/free-solid-svg-icons'
+  library.add(faXmark, faArrowLeft, faArrowRight, faFont, faCalendar)
+  /** Firebase */
+  import { useCollection } from 'vuefire';
+  import { collection, addDoc, doc, getDoc, updateDoc, deleteDoc } from 'firebase/firestore';
+  import { db } from '@/firebase'; 
+  /** Component */
+  import statChart from '@/components/statChart.vue';
+  import TransactionItem from '@/components/TransactionItem.vue';
+  /** Bootstrap imports */
+  import { Modal } from 'bootstrap';
+  /* Pinia stores */
+  import { useTransactionStore } from '@/stores/transactions';
+
+  // stockage des transaction dans le store depuis  
+  useTransactionStore();
 
   interface Transaction {
     name: string;
@@ -26,8 +32,8 @@ import TransactionItem from '@/components/TransactionItem.vue';
   let showError = ref(false);
   let currentTransactionId: string;
 
-  const db = useFirestore();
-  const transactionsCollection = useCollection(collection(db, 'transactions'));  
+
+  const transactionsCollection = useCollection(collection(db, 'transactions'));
 
   const newTransaction = ref<Transaction>({
     name: '',
@@ -65,7 +71,7 @@ import TransactionItem from '@/components/TransactionItem.vue';
     currentTransactionId = id;
     const docRef = doc(db, 'transactions', currentTransactionId);
     const docSnap = await getDoc(docRef);
-  
+
     if (docSnap.exists()) {
       newTransaction.value = { 
         id,
@@ -111,7 +117,8 @@ import TransactionItem from '@/components/TransactionItem.vue';
 
 <template>
   <main class="d-flex justify-content-center align-items-center flex-column">
-    <div id="transactions-list" class="w-100" v-if="transactions.length > 0">
+
+    <div id="transactions-list" class="w-100" v-if="transactionsCollection.length > 0">
       <div class="row">
         <div class="col-4">
           <h2 class="text-center mb-3">Revenus</h2>
@@ -146,8 +153,6 @@ import TransactionItem from '@/components/TransactionItem.vue';
           <statChart />
         </div>
       </div>
-
-
     </div>
 
     <div v-else>

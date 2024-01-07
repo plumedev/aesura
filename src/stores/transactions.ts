@@ -1,11 +1,18 @@
 import { defineStore } from 'pinia'
+import { ref, onMounted } from 'vue';
+import { useCollection } from 'vuefire';
+import { collection } from 'firebase/firestore';
+import { db } from '@/firebase'; 
 
-import transaction from '@/data/transactions.json'
+const transactionsCollection = useCollection(collection(db, 'transactions'));
 
 export const useTransactionStore = defineStore('TransactionStore', {
   state: () => {
     return {
-      transaction
+      transaction: transactionsCollection
     }
-  }
+  },
+
+  actions: {}
 })
+
