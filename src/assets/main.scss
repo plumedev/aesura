@@ -224,6 +224,17 @@ $light-green: #abd1c6;
   }
 }
 
+.navbar {
+  .menu {
+  }
+  &.fixed-bottom {
+    background-color: $light-green;
+    .router-link, button {
+      font-size: 1rem;
+    }
+  }
+}
+
 /**
 * HomeView.vue
 */
@@ -241,6 +252,7 @@ $light-green: #abd1c6;
   height: 54px;
   margin-bottom: 1rem;
   max-width: 320px;
+  width: 100%;
   .content {
     display: flex;
     justify-content: space-between;

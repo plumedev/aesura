@@ -120,7 +120,7 @@
 
     <div id="transactions-list" class="w-100" v-if="transactionsCollection.length > 0">
       <div class="row">
-        <div class="col-4">
+        <div class="col-12 col-md-4 d-flex flex-column align-items-center">
           <h2 class="text-center mb-3">Revenus</h2>
           <TransactionItem v-for="transaction in transactionsCollection.filter(t => t.isAnIncome)" 
               :key="transaction.name"
@@ -129,7 +129,7 @@
               @delete-transaction="deleteTransaction(transaction.id)"
                 />
         </div>
-        <div class="col-4">
+        <div class="col-12 col-md-4 d-flex flex-column align-items-center">
           <h2 class="text-center mb-3">Dépenses</h2>
           <TransactionItem v-for="transaction in transactionsCollection.filter(t => !t.isAnIncome)" 
               :key="transaction.name"
@@ -137,7 +137,7 @@
               @edit-transaction="editTransaction(transaction.id)"
               @delete-transaction="deleteTransaction(transaction.id)"/>
         </div>
-        <div class="col-4">
+        <div class="col-12 col-md-4">
           <div class="row">
             <div class="col-12 d-flex justify-content-center">
               <button type="button" 
