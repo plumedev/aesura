@@ -5,6 +5,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 library.add(faPenToSquare, faTrash)
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const props = defineProps({
     transaction: {
         type: Object,

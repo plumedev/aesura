@@ -65,7 +65,7 @@ const password: Ref<string> = ref('')
 const register = () =>  {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email.value, password.value)
-    .then((data) => {
+    .then(() => {
         console.log("Successfully registered!");
         router.push('/');
     })

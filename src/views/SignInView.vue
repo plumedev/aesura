@@ -18,6 +18,7 @@ const register = () =>  {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email.value, password.value)
     .then((data) => {
+        data
         console.log("Successfully sign in!");
         router.push('/');
     })
@@ -45,7 +46,7 @@ const register = () =>  {
 const signInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(getAuth(), provider)
-        .then((result) => {
+        .then(() => {
             router.push("/");
         })
         .catch((error) => {
