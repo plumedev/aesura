@@ -1,0 +1,8 @@
+{
+  "home": {
+    "welcome": "Bienvenue dans votre starter Vue3 + TypeScript !",
+    "subtitle": "Exemple d'intégration avec Vuetify, Pinia, i18n et API",
+    "fetchDataBtn": "Récupérer des données",
+    "apiResponse": "Réponse de l'API :"
+  }
+} 
