@@ -6,7 +6,7 @@ const routes: RouteRecordRaw[] = [
     path: '/',
     name: RouteName.ROOT,
     redirect: {
-      name: RouteName.HOME
+      name: RouteName.LOGIN,
     }
   },
   {
@@ -15,6 +15,14 @@ const routes: RouteRecordRaw[] = [
     component: () => import('../views/home-view/HomeView.vue'),
     meta: {
       title: 'Accueil'
+    }
+  },
+  {
+    path: '/login',
+    name: RouteName.LOGIN,
+    component: () => import('../views/login-view/LoginView.vue'),
+    meta: {
+      title: 'Connexion'
     }
   }
 ]
