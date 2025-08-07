@@ -1,31 +1,62 @@
-import { getExampleData } from '@/api/example/exampleService'
-import type { IExampleData } from '@/api/example/interfaces/IExampleData'
+import { signInWithPopup } from 'firebase/auth'
+import { auth, googleProvider } from '@/plugins/firebase'
+import { useAuthStore } from '@/stores/authStore'
 import { useRequest } from '@/composables/utils/useRequest'
+import router from '@/router'
 
-export function useGetExampleData() {
-  const runServices = async (): Promise<IExampleData> => {
+export function useAuthGoogle() {
+  const authStore = useAuthStore()
+
+  const runServices = async (routeName: string): Promise<void> => {
+    const { add } = useToast()
+
     try {
-      const result = await getExampleData()
-      // Utilisation directe du toast de NuxtUI via le composable global
-      const { add } = useToast()
+      authStore.setLoading(true)
+      authStore.clearError()
+      const result = await signInWithPopup(auth, googleProvider)
+      const user = result.user
+
+      authStore.setUser(user)
+
       add({
-        title: 'Données récupérées avec succès !',
+        title: `Connexion réussie ! Bienvenue ${user.displayName || user.email}`,
         color: 'success'
       })
-      return result
+
+      router.push({ name: routeName })
+
     } catch (error: unknown) {
-      const { add } = useToast()
+      console.error('Erreur de connexion Google:', error)
+
+      let errorMessage = 'Erreur lors de la connexion'
+
       if (error instanceof Error) {
-        add({
-          title: error.message,
-          color: 'error'
-        })
+        switch (error.message) {
+          case 'auth/popup-closed-by-user':
+            errorMessage = 'Connexion annulée'
+            break
+          case 'auth/popup-blocked':
+            errorMessage = 'Popup bloqué par le navigateur'
+            break
+          default:
+            errorMessage = error.message
+        }
       }
+
+      authStore.setError(errorMessage)
+
+      add({
+        title: `Erreur de connexion: ${errorMessage}`,
+        color: 'error'
+      })
+
       throw error
+    } finally {
+      authStore.setLoading(false)
     }
   }
 
-  return useRequest<IExampleData>({
+  return useRequest<void>({
     runServices
   })
 }
