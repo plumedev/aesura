@@ -3,7 +3,8 @@
  */
 enum RouteName {
   ROOT = 'root',
-  HOME = 'home'
+  HOME = 'home',
+  LOGIN = 'login',
 }
 
 export default RouteName

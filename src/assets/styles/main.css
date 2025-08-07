@@ -8,7 +8,7 @@
   --color-brand-50: #f7fdfa;   /* Très clair */
   --color-brand-100: #e8f8f0;
   --color-brand-200: #d1f1e0;
-  --color-brand-300: #a8e3c0;
+  --color-brand-300: #50E8A8;
   --color-brand-400: #76e0b0;  /* Bonsai - votre couleur principale */
   --color-brand-500: #57b98e;  /* Light green */
   --color-brand-600: #136342;  /* Semi green */
@@ -42,4 +42,17 @@
   --color-neutral-800: #1f2937;
   --color-neutral-900: #111827;
   --color-neutral-950: #030712;
+
+  /* Configuration des couleurs primaires pour utiliser brand-600 */
+  --color-primary-50: var(--color-brand-50);
+  --color-primary-100: var(--color-brand-100);
+  --color-primary-200: var(--color-brand-200);
+  --color-primary-300: var(--color-brand-300);
+  --color-primary-400: var(--color-brand-400);
+  --color-primary-500: var(--color-brand-500);
+  --color-primary-600: var(--color-brand-600);
+  --color-primary-700: var(--color-brand-700);
+  --color-primary-800: var(--color-brand-800);
+  --color-primary-900: var(--color-brand-900);
+  --color-primary-950: var(--color-brand-950);
 } 

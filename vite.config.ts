@@ -19,8 +19,45 @@ export default defineConfig({
           success: 'brand',      // Utilise votre palette brand pour le succès
           warning: 'yellow',     // Jaune pour les avertissements
           error: 'red'          // Rouge pour les erreurs
+        },
+        input: {
+          slots: {
+            root: 'bg-neutral-100 rounded-md',
+            base: 'rounded-md hover:bg-neutral-600',
+            leading: 'text-primary-600',
+            leadingIcon: 'text-primary-600',
+            leadingAvatar: 'text-primary-600',
+            trailing: 'text-primary-600',
+            trailingIcon: 'text-primary-600',
+          },
+          defaultVariants: {
+            variant: 'soft',
+            color: 'primary',
+            size: 'xl'
+          }
+        },
+        button: {
+          defaultVariants: {
+            variant: 'solid',
+            size: 'xl',
+            color: 'primary',
+          }
+        },
+        link : {
+          base: 'text-brand-700',
+          compoundVariants: [
+            {
+              active: false,
+              disabled: false,
+              class: [
+                'hover:text-default',
+                'transition-colors'
+              ]
+            }
+          ]
         }
-      }
+      },
+      colorMode: false,
     }),
     VueDevTools(),
     VueI18nPlugin({

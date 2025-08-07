@@ -1,3 +1,4 @@
+import { useAuthStore } from '@/stores/authStore'
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 import RouteName from './RouteName'
 
@@ -6,7 +7,7 @@ const routes: RouteRecordRaw[] = [
     path: '/',
     name: RouteName.ROOT,
     redirect: {
-      name: RouteName.HOME
+      name: RouteName.LOGIN,
     }
   },
   {
@@ -14,7 +15,17 @@ const routes: RouteRecordRaw[] = [
     name: RouteName.HOME,
     component: () => import('../views/home-view/HomeView.vue'),
     meta: {
-      title: 'Accueil'
+      title: 'Accueil',
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/login',
+    name: RouteName.LOGIN,
+    component: () => import('../views/login-view/LoginView.vue'),
+    meta: {
+      title: 'Connexion',
+      requiresGuest: true
     }
   }
 ]
@@ -24,12 +35,25 @@ const router = createRouter({
   routes
 })
 
-// Navigation guard simple pour les titres de page
-router.beforeEach((to) => {
+// Navigation guards
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore()
+
   if (to.meta.title) {
-    document.title = `${to.meta.title} - Vue Starter Kit`
+    document.title = `${to.meta.title} - Aesura`
   }
-  return true
+
+  if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+    next({ name: RouteName.LOGIN })
+    return
+  }
+
+  if (to.meta.requiresGuest && authStore.isAuthenticated) {
+    next({ name: RouteName.HOME })
+    return
+  }
+
+  next()
 })
 
 export default router
