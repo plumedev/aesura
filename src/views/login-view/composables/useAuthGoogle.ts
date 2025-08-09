@@ -18,12 +18,19 @@ export function useAuthGoogle() {
 
       authStore.setUser(user)
 
+      // Récupérer les données utilisateur depuis Firestore
+      await authStore.fetchUserData(user.uid)
+
       add({
         title: `Connexion réussie ! Bienvenue ${user.displayName || user.email}`,
         color: 'success'
       })
 
-      router.push({ name: routeName })
+      if (authStore.isTutorialActive) {
+        router.push({ name: 'tutorial' })
+      } else {
+        router.push({ name: routeName })
+      }
 
     } catch (error: unknown) {
       console.error('Erreur de connexion Google:', error)

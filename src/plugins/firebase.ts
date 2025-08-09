@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app'
-import { getAuth, GoogleAuthProvider } from 'firebase/auth'
+import { getAuth, GoogleAuthProvider, setPersistence, browserLocalPersistence } from 'firebase/auth'
+import { getFirestore } from 'firebase/firestore'
 
 // Configuration Firebase - Utilise les variables d'environnement
 const firebaseConfig = {
@@ -17,6 +18,12 @@ const app = initializeApp(firebaseConfig)
 
 // Initialiser Auth
 export const auth = getAuth(app)
+
+// Configurer la persistance locale
+setPersistence(auth, browserLocalPersistence)
+
+// Initialiser Firestore
+export const db = getFirestore(app)
 
 // Configurer le provider Google
 export const googleProvider = new GoogleAuthProvider()

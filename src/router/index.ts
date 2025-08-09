@@ -6,8 +6,16 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: RouteName.ROOT,
-    redirect: {
-      name: RouteName.LOGIN,
+    redirect: () => {
+      const authStore = useAuthStore()
+      // Si l'authentification n'est pas encore prête, ne pas rediriger
+      if (!authStore.isAuthReady) {
+        return { name: RouteName.LOGIN }
+      }
+      // Si l'utilisateur est connecté, rediriger vers home, sinon vers login
+      return authStore.isAuthenticated
+        ? { name: RouteName.HOME }
+        : { name: RouteName.LOGIN }
     }
   },
   {
@@ -27,6 +35,15 @@ const routes: RouteRecordRaw[] = [
       title: 'Connexion',
       requiresGuest: true
     }
+  },
+  {
+    path: '/tutorial',
+    name: RouteName.TUTORIAL,
+    component: () => import('../views/tutorial-view/TutorialView.vue'),
+    meta: {
+      title: 'Tutoriel',
+      requiresAuth: true
+    }
   }
 ]
 
@@ -36,24 +53,28 @@ const router = createRouter({
 })
 
 // Navigation guards
-router.beforeEach((to, from, next) => {
+router.beforeEach((to) => {
   const authStore = useAuthStore()
 
   if (to.meta.title) {
     document.title = `${to.meta.title} - Aesura`
   }
 
-  if (to.meta.requiresAuth && !authStore.isAuthenticated) {
-    next({ name: RouteName.LOGIN })
+  // Attendre que l'authentification soit initialisée avant de faire des redirections
+  if (!authStore.isAuthReady) {
     return
+  }
+
+  if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+    return { name: RouteName.LOGIN }
   }
 
   if (to.meta.requiresGuest && authStore.isAuthenticated) {
-    next({ name: RouteName.HOME })
-    return
+    return { name: RouteName.HOME }
+
   }
 
-  next()
+  return true
 })
 
 export default router
