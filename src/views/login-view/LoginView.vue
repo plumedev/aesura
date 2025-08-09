@@ -56,7 +56,6 @@ import { useAuthGoogle } from './composables/useAuthGoogle'
 import RouteName from '@/router/RouteName'
 
 const show = ref(false)
-const email = ref('')
 const password = ref('')
 
 const {
