@@ -1,0 +1,24 @@
+{
+  "tutorial": {
+    "stepOne": {
+      "title": "Personnalisez et ajoutez des comptes",
+      "description": "Donnez un nom a votre compte principal et ajoutez autant de compte que vous le souhaitez.",
+      "form": {
+        "accountName": "Nom du compte",
+        "accountNamePlaceholder": "Nom du compte",
+        "addAccount": "Ajouter des comptes",
+        "addAccountDescription": "Si vous possédez d'autres comptes bancaires (compte joint, coffres de budget dans une néo-banque, compte épargne...) ou bien des cartes bancaires (cartes bancaires de néo-banque, crypto...) vous pouvez les créer maintenant et en ajouter plus tard."
+      },
+      "table": {
+        "addAccountInput": "Nom du nouveau compte",
+        "addButton": "Ajouter",
+        "columns": {
+          "principal": "Principal",
+          "account": "Compte",
+          "actions": ""
+        },
+        "noAccounts": "Aucun compte ajouté"
+      }
+    }
+  }
+} 

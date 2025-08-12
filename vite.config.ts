@@ -23,7 +23,6 @@ export default defineConfig({
         input: {
           slots: {
             root: 'bg-neutral-100 rounded-md',
-            base: 'rounded-md hover:bg-neutral-600',
             leading: 'text-primary-600',
             leadingIcon: 'text-primary-600',
             leadingAvatar: 'text-primary-600',
@@ -55,7 +54,7 @@ export default defineConfig({
               ]
             }
           ]
-        }
+        },
       },
       colorMode: false,
     }),
