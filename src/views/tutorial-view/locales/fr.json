@@ -7,7 +7,8 @@
         "accountName": "Nom du compte",
         "accountNamePlaceholder": "Nom du compte",
         "addAccount": "Ajouter des comptes",
-        "addAccountDescription": "Si vous possédez d'autres comptes bancaires (compte joint, coffres de budget dans une néo-banque, compte épargne...) ou bien des cartes bancaires (cartes bancaires de néo-banque, crypto...) vous pouvez les créer maintenant et en ajouter plus tard."
+        "addAccountDescription": "Si vous possédez d'autres comptes bancaires (compte joint, coffres de budget dans une néo-banque, compte épargne...) ou bien des cartes bancaires (cartes bancaires de néo-banque, crypto...) vous pouvez les créer maintenant et en ajouter plus tard.",
+        "addPlaceholder": "Nom du compte à créer"
       },
       "table": {
         "addAccountInput": "Nom du nouveau compte",

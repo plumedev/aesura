@@ -18,84 +18,78 @@
     </p>
     <div class="w-full space-y-4 pb-4">
       <div class="flex flex-col justify-center pt-4">
-        <div class="table-header flex flex-row items-center h-auto bg-neutral-100 rounded-t-md p-3">
-          <UButtonGroup>
-            <UInput color="primary" size="md" icon="i-lucide-text" variant="outline"
-              :placeholder="$t('tutorial.stepOne.form.addPlaceholder')" class="w-full" v-model="accountName" />
-            <UButton icon="i-lucide-circle-plus" color="primary" @click="addAccount" size="md" />
-          </UButtonGroup>
+        <div class="table-header flex flex-row items-center h-auto bg-neutral-100 rounded-t-md p-3 ">
+
+          <UInput color="primary" icon="i-lucide-text" variant="outline"
+            :placeholder="$t('tutorial.stepOne.form.addPlaceholder')" class="w-full" v-model="accountName" />
+
+          <UButton icon="i-lucide-circle-plus" @click="addAccount" size="xl" />
+
         </div>
-        <UTable :data="data" :columns="columns" class="flex-1 bg-neutral-100" />
+        <UTable sticky :data="accountsData" :columns="columns" :loading="isLoading" loading-color="primary"
+          loading-animation="swing" class="flex-1 max-h-[325px] bg-neutral-100" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { h, resolveComponent } from 'vue'
 import type { TableColumn } from '@nuxt/ui'
 import type { Row } from '@tanstack/vue-table'
-import { useClipboard } from '@vueuse/core'
+import { collection, type DocumentData } from 'firebase/firestore'
+import { db } from '@/plugins/firebase'
+import { useGetDocs } from '@/composables/firebase/useGetDocs'
+import { useAddDoc } from '@/composables/firebase/useAddDoc'
+import { useDeleteDoc } from '@/composables/firebase/useDeleteDoc'
+import { useDefineMainAccount } from '@/composables/firebase/useDefineMainAccount'
 
 const accountName = ref('')
 const UButton = resolveComponent('UButton')
 const UBadge = resolveComponent('UBadge')
 const UDropdownMenu = resolveComponent('UDropdownMenu')
 
+const accountsCollectionRef = collection(db, 'accounts')
+
 const toast = useToast()
-const { copy } = useClipboard()
-const addAccount = () => {
-  console.log('addAccount')
+const { data: accountsData, isLoading, doRequest: getAccounts } = useGetDocs()
+const { doRequest: addAccountRequest } = useAddDoc()
+const { doRequest: deleteAccountRequest } = useDeleteDoc()
+const { doRequest: defineMainAccountRequest } = useDefineMainAccount()
+
+
+const addAccount = async () => {
+  addAccountRequest(collection(db, 'accounts'), {
+    name: accountName.value,
+    isMainAccount: false,
+    createdAt: new Date()
+  })
+  await getAccounts(accountsCollectionRef) as Account[]
 }
 
-type Payment = {
+const deleteAccount = async (accountId: string) => {
+  await deleteAccountRequest(accountsCollectionRef, accountId)
+  await getAccounts(accountsCollectionRef) as Account[]
+}
+
+const defineMainAccount = async (accountId: string) => {
+  await defineMainAccountRequest(accountsCollectionRef, accountId)
+  await getAccounts(accountsCollectionRef) as Account[]
+}
+
+interface Account {
   id: string
-  accountId: string
   isMainAccount: boolean
-  currentBalance: number
   name: string
+  createdAt?: {
+    type: 'timestamp'
+    seconds: number
+    nanoseconds: number
+  }
 }
 
-const data = ref<Payment[]>([
-  {
-    id: "0yjX35dYhtkePRXttNFc",
-    accountId: "phnLBYYjhH",
-    isMainAccount: true,
-    currentBalance: 2450.75,
-    name: "Compte Principal - CIC"
-  },
-  {
-    id: "H75EiH1Owpf0kwW087eG",
-    accountId: "revolut123",
-    isMainAccount: false,
-    currentBalance: 1250.30,
-    name: "Revolut"
-  },
-  {
-    id: "abc123def456",
-    accountId: "lcl456",
-    isMainAccount: false,
-    currentBalance: 5000.00,
-    name: "Épargne LCL"
-  },
-  {
-    id: "xyz789uvw012",
-    accountId: "credit789",
-    isMainAccount: false,
-    currentBalance: -125.50,
-    name: "Carte de Crédit"
-  },
-  {
-    id: "cash001",
-    accountId: "cash123",
-    isMainAccount: false,
-    currentBalance: 85.25,
-    name: "Espèces"
-  }
-])
-
-const columns: TableColumn<Payment>[] = [
+const columns: TableColumn<DocumentData>[] = [
   {
     accessorKey: 'name',
     header: 'Nom du Compte',
@@ -145,44 +139,38 @@ const columns: TableColumn<Payment>[] = [
   }
 ]
 
-function getRowItems(row: Row<Payment>) {
+const getRowItems = (row: Row<DocumentData>) => {
   return [
     {
-      type: 'label',
-      label: 'Actions'
-    },
-    {
-      label: 'Copier l\'ID du compte',
+      label: 'Supprimer le compte',
+      icon: 'i-lucide-trash',
       onSelect() {
-        copy(row.original.id)
-
+        if (row.original.id) {
+          deleteAccount(row.original.id)
+        }
         toast.add({
-          title: 'ID du compte copié !',
+          title: 'Compte supprimé avec succès',
           color: 'success',
-          icon: 'i-lucide-circle-check'
+          icon: 'i-lucide-trash-2'
         })
       }
     },
     {
-      type: 'separator'
-    },
-    {
-      label: 'Voir les transactions'
-    },
-    {
-      label: 'Modifier le compte'
-    },
-    {
-      label: 'Supprimer le compte',
+      label: 'Définir comme principal',
+      icon: 'i-lucide-star',
       onSelect() {
-        // TODO: Implémenter la suppression
+        defineMainAccount(row.original.id)
         toast.add({
           title: 'Fonctionnalité à venir',
           color: 'warning',
-          icon: 'i-lucide-alert-triangle'
+          icon: 'i-lucide-text'
         })
       }
     }
   ]
 }
+
+onMounted(async () => {
+  await getAccounts(accountsCollectionRef) as Account[]
+})
 </script>
