@@ -39,12 +39,28 @@ p {
 
 /* Styles pour les liens */
 a {
-  color: #007bff;
+  color: var(--color-brand-600);
   text-decoration: none;
   transition: color 0.2s ease-in-out;
+  &:hover {
+    text-decoration: underline;
+  }
+  
 }
 
-a:hover {
-  color: #0056b3;
-  text-decoration: underline;
+input {
+  background-color: var(--color-neutral-100);
+  border-color: transparent;
+  border-width: 2px;
+  &:focus {
+    border-width: 2px;
+    border-color: var(--color-brand-600);
+  }
+  &:disabled {
+    background-color: var(--color-neutral-200);
+    border-color: var(--color-neutral-300);
+  }
+  &:placeholder {
+    color: var(--color-neutral-500);
+  }
 }

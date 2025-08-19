@@ -3,11 +3,13 @@
     <StyleProvider>
       <ExampleProvider>
         <div style="min-height: 100vh; background-color: #f8f9fa;">
-          <main class="bg-stone-100 min-h-screen">
+          <main class="bg-white min-h-screen">
             <!-- Afficher le contenu seulement quand l'authentification est prête -->
             <template v-if="authStore.isAuthReady">
               <HeaderLayout v-if="authStore.isAuthenticated" />
-              <RouterView />
+              <div class="flex flex-col w-full justify-center items-center ">
+                <RouterView />
+              </div>
             </template>
             <!-- Indicateur de chargement pendant l'initialisation -->
             <template v-else>

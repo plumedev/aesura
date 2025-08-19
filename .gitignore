@@ -66,6 +66,10 @@ coverage/
 tmp/
 temp/ 
 
+# Firebase structure documentation (not versioned)
+FIREBASE_STRUCTURE.md
+FIREBASE_SCHEMA.md
+
 # .gitignore
 .env
 .env.local
