@@ -1,6 +1,6 @@
 <template>
   <p class="text-md font-semibold uppercase text-brand-600">
-    étape {{ currentStep + 1 }} sur {{ totalStep }}
+    {{ $t('progress.step', { currentStep: currentStep + 1, totalStep: totalStep }) }}
   </p>
 </template>
 

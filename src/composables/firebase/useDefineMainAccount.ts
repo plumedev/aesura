@@ -1,5 +1,5 @@
-import { updateDoc, doc, collection, query, where, getDocs, type CollectionReference } from "firebase/firestore"
 import { useRequest } from "@/composables/utils/useRequest"
+import { doc, getDocs, query, updateDoc, where, type CollectionReference } from "firebase/firestore"
 
 export function useDefineMainAccount() {
   const runServices = async (collectionRef: CollectionReference, accountId: string): Promise<boolean> => {
@@ -12,11 +12,9 @@ export function useDefineMainAccount() {
         throw new Error('ID du compte invalide')
       }
 
-      // 1. Trouver le compte actuellement principal et le passer à false
       const mainAccountQuery = query(collectionRef, where('isMainAccount', '==', true))
       const mainAccountSnapshot = await getDocs(mainAccountQuery)
 
-      // Mettre à jour tous les comptes principaux existants à false
       const updatePromises = mainAccountSnapshot.docs.map(async (docSnapshot) => {
         const docRef = doc(collectionRef, docSnapshot.id)
         return updateDoc(docRef, { isMainAccount: false })
@@ -24,11 +22,9 @@ export function useDefineMainAccount() {
 
       await Promise.all(updatePromises)
 
-      // 2. Définir le nouveau compte comme principal
       const newMainAccountRef = doc(collectionRef, accountId)
       await updateDoc(newMainAccountRef, { isMainAccount: true })
 
-      console.log('Compte défini comme principal avec succès:', accountId)
       return true
     } catch (error) {
 

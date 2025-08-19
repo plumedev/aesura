@@ -1,5 +1,5 @@
-import { deleteDoc, doc, getDoc, type CollectionReference } from "firebase/firestore"
 import { useRequest } from "@/composables/utils/useRequest"
+import { deleteDoc, doc, getDoc, type CollectionReference } from "firebase/firestore"
 
 export function useDeleteDoc() {
   const runServices = async (collectionRef: CollectionReference, documentId: string): Promise<boolean> => {
@@ -14,7 +14,6 @@ export function useDeleteDoc() {
 
       const docRef = doc(collectionRef, documentId)
 
-      // Vérifier si le document existe avant de le supprimer
       const docSnap = await getDoc(docRef)
       if (!docSnap.exists()) {
         throw new Error('Document introuvable. Vérifiez l\'ID du document.')
@@ -22,7 +21,6 @@ export function useDeleteDoc() {
 
       await deleteDoc(docRef)
 
-      console.log('Document supprimé avec succès:', documentId)
       return true
     } catch (error) {
 

@@ -21,5 +21,8 @@
         "noAccounts": "Aucun compte ajouté"
       }
     }
+  },
+  "progress": {
+    "step": "Étape {currentStep} sur {totalStep}"
   }
 } 

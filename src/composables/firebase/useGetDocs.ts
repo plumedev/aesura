@@ -1,5 +1,5 @@
-import { getDocs, type CollectionReference, type QuerySnapshot, type DocumentData } from "firebase/firestore"
 import { useRequest } from "@/composables/utils/useRequest"
+import { getDocs, type CollectionReference, type DocumentData, type QuerySnapshot } from "firebase/firestore"
 
 export function useGetDocs() {
   const runServices = async (collectionRef: CollectionReference): Promise<DocumentData[]> => {
@@ -17,7 +17,7 @@ export function useGetDocs() {
           ...doc.data()
         })
       })
-      console.log('documents', documents)
+
       return documents
     } catch (error) {
 

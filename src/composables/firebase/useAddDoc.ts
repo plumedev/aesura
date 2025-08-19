@@ -1,5 +1,5 @@
-import { addDoc, type CollectionReference, type DocumentData } from "firebase/firestore"
 import { useRequest } from "@/composables/utils/useRequest"
+import { addDoc, type CollectionReference, type DocumentData } from "firebase/firestore"
 
 export function useAddDoc() {
   const runServices = async (collectionRef: CollectionReference, data: DocumentData): Promise<DocumentData> => {
@@ -19,7 +19,6 @@ export function useAddDoc() {
         ...data
       }
 
-      console.log('Document ajouté avec succès:', newDocument)
       return newDocument
     } catch (error) {
 
