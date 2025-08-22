@@ -5,10 +5,12 @@ Ce projet utilise un thème personnalisé pour NuxtUI avec des couleurs et des v
 ## 🎨 Couleurs Personnalisées
 
 ### Couleur Primaire
+
 - **Couleur principale** : `#76E0B0` (vert personnalisé)
 - **Couleur de texte** : `#383838` (gris foncé)
 
 ### Palette Complète
+
 ```typescript
 primary: {
   500: '#76E0B0', // Couleur principale
@@ -23,23 +25,29 @@ gray: {
 ## ⚙️ Configuration
 
 ### 1. Configuration dans `vite.config.ts`
+
 ```typescript
 ui({
   ui: {
     colors: {
-      primary: { /* palette verte personnalisée */ },
-      gray: { /* palette grise personnalisée */ }
+      primary: {
+        /* palette verte personnalisée */
+      },
+      gray: {
+        /* palette grise personnalisée */
+      },
     },
     defaultVariants: {
       Button: { color: 'primary', size: 'lg' },
       Card: { color: 'white' },
-      Alert: { color: 'error', variant: 'soft' }
-    }
-  }
+      Alert: { color: 'error', variant: 'soft' },
+    },
+  },
 })
 ```
 
 ### 2. Plugin NuxtUI (`src/plugins/nuxtui.ts`)
+
 - Définit la palette de couleurs
 - Configure les variantes par défaut
 - Injecte la configuration dans l'application
@@ -47,6 +55,7 @@ ui({
 ## 🚀 Utilisation
 
 ### Utilisation Automatique
+
 Les composants utilisent automatiquement les variantes par défaut :
 
 ```vue
@@ -62,28 +71,30 @@ Les composants utilisent automatiquement les variantes par défaut :
 ```
 
 ### Utilisation Programmatique
+
 ```vue
 <script setup>
-import { useTheme } from '@/composables/useTheme'
+  import { useTheme } from '@/composables/useTheme'
 
-const { getPrimaryColor, getTextColor } = useTheme()
+  const { getPrimaryColor, getTextColor } = useTheme()
 
-const primaryColor = getPrimaryColor(500) // #76E0B0
-const textColor = getTextColor(900) // #383838
+  const primaryColor = getPrimaryColor(500) // #76E0B0
+  const textColor = getTextColor(900) // #383838
 </script>
 ```
 
 ### Utilisation des Utilitaires
+
 ```vue
 <script setup>
-import { COLORS, getColorValue } from '@/utils/colors'
+  import { COLORS, getColorValue } from '@/utils/colors'
 
-// Constantes prédéfinies
-const primaryColor = COLORS.PRIMARY // #76E0B0
-const textColor = COLORS.TEXT_PRIMARY // #383838
+  // Constantes prédéfinies
+  const primaryColor = COLORS.PRIMARY // #76E0B0
+  const textColor = COLORS.TEXT_PRIMARY // #383838
 
-// Ou obtenir une couleur spécifique
-const customColor = getColorValue('primary', 600)
+  // Ou obtenir une couleur spécifique
+  const customColor = getColorValue('primary', 600)
 </script>
 ```
 
@@ -118,7 +129,7 @@ export const colorPalette = {
   primary: {
     500: '#VOTRE_COULEUR', // Changez ici
     // ...
-  }
+  },
 }
 ```
 
@@ -126,9 +137,9 @@ Pour modifier les variantes par défaut, éditez `vite.config.ts` :
 
 ```typescript
 defaultVariants: {
-  Button: { 
-    color: 'primary', 
+  Button: {
+    color: 'primary',
     size: 'lg' // Changez la taille par défaut
   }
 }
-``` 
+```

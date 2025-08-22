@@ -9,14 +9,17 @@ import './assets/styles/main.css'
 
 const app = createApp(App)
 
-app.use(createPinia())
-   .use(router)
-   .use(i18n)
-   .use(ui)
-   .use(nuxtuiPlugin)
+app.use(createPinia()).use(router).use(i18n).use(ui).use(nuxtuiPlugin)
 
 app.config.errorHandler = (err, instance, info) => {
-  console.error('Global error:', err, 'Vue instance:', instance, 'Error info:', info)
+  console.error(
+    'Global error:',
+    err,
+    'Vue instance:',
+    instance,
+    'Error info:',
+    info
+  )
 }
 
 window.addEventListener('unhandledrejection', (event) => {

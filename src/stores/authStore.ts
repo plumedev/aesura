@@ -13,7 +13,6 @@ export interface AuthUser {
 }
 
 export const useAuthStore = defineStore('auth', () => {
-
   const user = ref<AuthUser | null>(null)
   const loading = ref(false)
   const error = ref<string | null>(null)
@@ -30,7 +29,7 @@ export const useAuthStore = defineStore('auth', () => {
         uid: firebaseUser.uid,
         email: firebaseUser.email,
         displayName: firebaseUser.displayName,
-        isTutorialActive: false
+        isTutorialActive: false,
       }
     } else {
       user.value = null
@@ -47,18 +46,21 @@ export const useAuthStore = defineStore('auth', () => {
         const userData = userDoc.data()
         user.value = {
           ...user.value!,
-          isTutorialActive: userData.isTutorialActive ?? true
+          isTutorialActive: userData.isTutorialActive ?? true,
         }
       } else {
         await setDoc(userDocRef, {
           email: user.value?.email,
           displayName: user.value?.displayName,
           isTutorialActive: true,
-          createdAt: new Date()
+          createdAt: new Date(),
         })
       }
     } catch (error) {
-      console.error('Erreur lors de la récupération des données utilisateur:', error)
+      console.error(
+        'Erreur lors de la récupération des données utilisateur:',
+        error
+      )
     }
   }
 
@@ -97,7 +99,6 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   return {
-
     user,
     loading,
     error,
@@ -113,6 +114,6 @@ export const useAuthStore = defineStore('auth', () => {
     clearError,
     logout,
     fetchUserData,
-    initAuthListener
+    initAuthListener,
   }
 })

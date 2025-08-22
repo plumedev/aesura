@@ -1,7 +1,12 @@
 <template>
-  <UContainer class="min-h-screen flex items-center justify-center ">
+  <UContainer class="min-h-screen flex items-center justify-center">
     <form class="flex flex-col items-center justify-center gap-y-4">
-      <UInput icon="i-lucide-at-sign" size="xl" placeholder="Mail" class="w-full"/>
+      <UInput
+        icon="i-lucide-at-sign"
+        size="xl"
+        placeholder="Mail"
+        class="w-full"
+      />
       <UInput
         v-model="password"
         placeholder="Mot de passe"
@@ -44,33 +49,35 @@
 
       <p>
         Pas encore inscrit ?
-        <ULink raw to="/register" class="font-bold underline text-brand-700">Créer un compte</ULink>
+        <ULink raw to="/register" class="font-bold underline text-brand-700"
+          >Créer un compte</ULink
+        >
       </p>
     </form>
   </UContainer>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useAuthGoogle } from './composables/useAuthGoogle'
-import RouteName from '@/router/RouteName'
+  import { ref } from 'vue'
+  import { useAuthGoogle } from './composables/useAuthGoogle'
+  import RouteName from '@/router/RouteName'
 
-const show = ref(false)
-const password = ref('')
+  const show = ref(false)
+  const password = ref('')
 
-const {
-  doRequest: signInWithGoogle,
-  isLoading,
-  isError,
-  errorMessage,
-} = useAuthGoogle()
+  const {
+    doRequest: signInWithGoogle,
+    isLoading,
+    isError,
+    errorMessage,
+  } = useAuthGoogle()
 
-// Gérer la connexion Google
-const handleGoogleSignIn = async () => {
-  try {
-    await signInWithGoogle(RouteName.HOME)
-  } catch (error) {
-    console.error('Erreur lors de la connexion Google:', error)
+  // Gérer la connexion Google
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle(RouteName.HOME)
+    } catch (error) {
+      console.error('Erreur lors de la connexion Google:', error)
+    }
   }
-}
 </script>

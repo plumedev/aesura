@@ -1,7 +1,7 @@
 export enum TOAST_TYPE {
   ERROR = 'error',
   SUCCESS = 'success',
-  WARNING = 'warning'
+  WARNING = 'warning',
 }
 
 export interface IToast {

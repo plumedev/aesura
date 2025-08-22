@@ -10,7 +10,10 @@ export interface IParams<T> {
   runServices: (...args: any) => Promise<T>
 }
 
-export function useRequest<T>({ options = { immediate: false }, runServices }: IParams<T>) {
+export function useRequest<T>({
+  options = { immediate: false },
+  runServices,
+}: IParams<T>) {
   const isLoading = ref<boolean>(false)
   const isError = ref<boolean>(false)
   const errorMessage = ref<string>()

@@ -16,7 +16,7 @@ const routes: RouteRecordRaw[] = [
       return authStore.isAuthenticated
         ? { name: RouteName.HOME }
         : { name: RouteName.LOGIN }
-    }
+    },
   },
   {
     path: '/home',
@@ -24,8 +24,8 @@ const routes: RouteRecordRaw[] = [
     component: () => import('../views/home-view/HomeView.vue'),
     meta: {
       title: 'Accueil',
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
   {
     path: '/login',
@@ -33,8 +33,8 @@ const routes: RouteRecordRaw[] = [
     component: () => import('../views/login-view/LoginView.vue'),
     meta: {
       title: 'Connexion',
-      requiresGuest: true
-    }
+      requiresGuest: true,
+    },
   },
   {
     path: '/tutorial',
@@ -42,14 +42,24 @@ const routes: RouteRecordRaw[] = [
     component: () => import('../views/tutorial-view/TutorialView.vue'),
     meta: {
       title: 'Tutoriel',
-      requiresAuth: true
-    }
-  }
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/tutorial/:step',
+    name: RouteName.TUTORIAL_STEP,
+    component: () => import('../views/tutorial-view/TutorialView.vue'),
+    props: true,
+    meta: {
+      title: 'Tutoriel',
+      requiresAuth: true,
+    },
+  },
 ]
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes
+  routes,
 })
 
 // Navigation guards
@@ -71,7 +81,6 @@ router.beforeEach((to) => {
 
   if (to.meta.requiresGuest && authStore.isAuthenticated) {
     return { name: RouteName.HOME }
-
   }
 
   return true

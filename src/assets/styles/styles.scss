@@ -13,7 +13,12 @@ body {
 }
 
 /* Styles pour les titres */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0 0 1rem 0;
   font-weight: 600;
   line-height: 1.2;
@@ -45,7 +50,6 @@ a {
   &:hover {
     text-decoration: underline;
   }
-  
 }
 
 input {
@@ -63,4 +67,9 @@ input {
   &:placeholder {
     color: var(--color-neutral-500);
   }
+}
+.u-input[data-variant='soft'],
+.u-input--soft {
+  background-color: #ff0000 !important;
+  border-color: #ff0000 !important;
 }
