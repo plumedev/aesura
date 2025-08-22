@@ -1,27 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
-@import "tailwindcss";
-@import "@nuxt/ui";
-@import "./scss/UTable.scss";
-
+@import 'tailwindcss';
+@import '@nuxt/ui';
+@import './scss/UTable.scss';
 
 body {
-  font-family: "DM Sans", sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-optical-sizing: auto;
   font-style: normal !important;
 }
 
 @theme {
   /* Palette brand personnalisée basée sur vos couleurs */
-  
+
   /* Couleur principale - Bonsai et ses nuances */
-  --color-brand-50: #f7fdfa;   /* Très clair */
+  --color-brand-50: #f7fdfa; /* Très clair */
   --color-brand-100: #e8f8f0;
   --color-brand-200: #d1f1e0;
-  --color-brand-300: #50E8A8;
-  --color-brand-400: #76e0b0;  /* Bonsai - votre couleur principale */
-  --color-brand-500: #57b98e;  /* Light green */
-  --color-brand-600: #136342;  /* Semi green */
-  --color-brand-700: #0a3322;  /* Dark green */
+  --color-brand-300: #50e8a8;
+  --color-brand-400: #76e0b0; /* Bonsai - votre couleur principale */
+  --color-brand-500: #57b98e; /* Light green */
+  --color-brand-600: #136342; /* Semi green */
+  --color-brand-700: #0a3322; /* Dark green */
   --color-brand-800: #052e16;
   --color-brand-900: #031a0d;
   --color-brand-950: #011005;
@@ -31,9 +30,9 @@ body {
   --color-stone-100: #f5f5f4;
   --color-stone-200: #e7e5e4;
   --color-stone-300: #d6d3d1;
-  --color-stone-400: #a8a19b;  /* Quick Silver */
-  --color-stone-500: #7a7570;  /* Sonic Silver */
-  --color-stone-600: #383838;  /* Stone - votre couleur secondaire */
+  --color-stone-400: #a8a19b; /* Quick Silver */
+  --color-stone-500: #7a7570; /* Sonic Silver */
+  --color-stone-600: #383838; /* Stone - votre couleur secondaire */
   --color-stone-700: #292524;
   --color-stone-800: #1c1917;
   --color-stone-900: #0c0a09;
@@ -41,8 +40,8 @@ body {
 
   /* Couleurs neutres personnalisées */
   --color-neutral-50: #fdfcfb;
-  --color-neutral-100: #f3ede7;  /* Sand */
-  --color-neutral-200: #ededed;  /* Grey */
+  --color-neutral-100: #f3ede7; /* Sand */
+  --color-neutral-200: #ededed; /* Grey */
   --color-neutral-300: #d1d5db;
   --color-neutral-400: #9ca3af;
   --color-neutral-500: #6b7280;
@@ -64,4 +63,4 @@ body {
   --color-primary-800: var(--color-brand-800);
   --color-primary-900: var(--color-brand-900);
   --color-primary-950: var(--color-brand-950);
-} 
+}

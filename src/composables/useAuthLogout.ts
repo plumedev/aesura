@@ -23,11 +23,10 @@ export function useAuthLogout() {
       const { add } = useToast()
       add({
         title: 'Déconnexion réussie !',
-        color: 'success'
+        color: 'success',
       })
 
       router.push({ name: RouteName.LOGIN })
-
     } catch (error: unknown) {
       console.error('Erreur lors de la déconnexion:', error)
 
@@ -42,7 +41,7 @@ export function useAuthLogout() {
       const { add } = useToast()
       add({
         title: `Erreur de déconnexion: ${errorMessage}`,
-        color: 'error'
+        color: 'error',
       })
 
       throw error
@@ -52,6 +51,6 @@ export function useAuthLogout() {
   }
 
   return useRequest<void>({
-    runServices
+    runServices,
   })
 }

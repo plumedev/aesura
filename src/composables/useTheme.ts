@@ -5,7 +5,10 @@ export function useTheme() {
   const nuxtuiConfig = inject<NuxtUIConfig>('nuxtuiConfig')
   const colorPalette = inject<CustomColors>('colorPalette')
 
-  const getColor = (colorName: keyof CustomColors, shade: string | number = 500): string => {
+  const getColor = (
+    colorName: keyof CustomColors,
+    shade: string | number = 500
+  ): string => {
     if (!colorPalette) return '#000000'
 
     const colorGroup = colorPalette[colorName]
@@ -34,6 +37,6 @@ export function useTheme() {
     getColor,
     getPrimaryColor,
     getTextColor,
-    getDefaultVariants
+    getDefaultVariants,
   }
 }

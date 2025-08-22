@@ -5,16 +5,15 @@
   </nav>
 </template>
 <script setup lang="ts">
-import { useAuthLogout } from '@/composables/useAuthLogout'
+  import { useAuthLogout } from '@/composables/useAuthLogout'
 
-const { doRequest: logout } = useAuthLogout()
+  const { doRequest: logout } = useAuthLogout()
 
-const handleLogout = async () => {
-  try {
-    await logout()
-  } catch (error) {
-    console.error('Erreur lors de la déconnexion:', error)
+  const handleLogout = async () => {
+    try {
+      await logout()
+    } catch (error) {
+      console.error('Erreur lors de la déconnexion:', error)
+    }
   }
-}
-
 </script>

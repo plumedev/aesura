@@ -1,5 +1,7 @@
 <template>
-  <UContainer class="min-h-screen flex items-center justify-center py-8 bg-white">
+  <UContainer
+    class="min-h-screen flex items-center justify-center py-8 bg-white"
+  >
     <UCard class="max-w-4xl w-full bg-neutral-100">
       <div class="text-center">
         <h1 class="text-4xl font-bold mb-4 text-stone-600">
@@ -68,7 +70,9 @@
           </h2>
 
           <!-- Couleurs principales -->
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
+          >
             <!-- Brand (Bonsai) -->
             <div class="bg-neutral-100 p-4 rounded-lg">
               <h3 class="font-semibold mb-3 text-stone-600">Brand (Bonsai)</h3>
@@ -90,20 +94,30 @@
                   <span class="text-xs text-stone-600">300</span>
                 </div>
                 <div class="flex items-center gap-2">
-                  <div class="w-6 h-6 rounded bg-brand-400 border-2 border-gray-300"></div>
-                  <span class="text-xs font-bold text-stone-600">400 - Bonsai (#76E0B0)</span>
+                  <div
+                    class="w-6 h-6 rounded bg-brand-400 border-2 border-gray-300"
+                  ></div>
+                  <span class="text-xs font-bold text-stone-600"
+                    >400 - Bonsai (#76E0B0)</span
+                  >
                 </div>
                 <div class="flex items-center gap-2">
                   <div class="w-6 h-6 rounded bg-brand-500"></div>
-                  <span class="text-xs text-stone-600">500 - Light green (#57B98E)</span>
+                  <span class="text-xs text-stone-600"
+                    >500 - Light green (#57B98E)</span
+                  >
                 </div>
                 <div class="flex items-center gap-2">
                   <div class="w-6 h-6 rounded bg-brand-600"></div>
-                  <span class="text-xs text-stone-600">600 - Semi green (#136342)</span>
+                  <span class="text-xs text-stone-600"
+                    >600 - Semi green (#136342)</span
+                  >
                 </div>
                 <div class="flex items-center gap-2">
                   <div class="w-6 h-6 rounded bg-brand-700"></div>
-                  <span class="text-xs text-stone-600">700 - Dark green (#0A3322)</span>
+                  <span class="text-xs text-stone-600"
+                    >700 - Dark green (#0A3322)</span
+                  >
                 </div>
                 <div class="flex items-center gap-2">
                   <div class="w-6 h-6 rounded bg-brand-800"></div>
@@ -118,7 +132,9 @@
 
             <!-- Stone -->
             <div class="bg-neutral-100 p-4 rounded-lg">
-              <h3 class="font-semibold mb-3 text-stone-600">Stone (Gris Sophistiqué)</h3>
+              <h3 class="font-semibold mb-3 text-stone-600">
+                Stone (Gris Sophistiqué)
+              </h3>
               <div class="space-y-2">
                 <div class="flex items-center gap-2">
                   <div class="w-6 h-6 rounded bg-stone-50"></div>
@@ -137,16 +153,26 @@
                   <span class="text-xs text-stone-600">300</span>
                 </div>
                 <div class="flex items-center gap-2">
-                  <div class="w-6 h-6 rounded bg-stone-400 border-2 border-gray-300"></div>
-                  <span class="text-xs font-bold text-stone-600">400 - Quick Silver (#A8A19B)</span>
+                  <div
+                    class="w-6 h-6 rounded bg-stone-400 border-2 border-gray-300"
+                  ></div>
+                  <span class="text-xs font-bold text-stone-600"
+                    >400 - Quick Silver (#A8A19B)</span
+                  >
                 </div>
                 <div class="flex items-center gap-2">
                   <div class="w-6 h-6 rounded bg-stone-500"></div>
-                  <span class="text-xs text-stone-600">500 - Sonic Silver (#7A7570)</span>
+                  <span class="text-xs text-stone-600"
+                    >500 - Sonic Silver (#7A7570)</span
+                  >
                 </div>
                 <div class="flex items-center gap-2">
-                  <div class="w-6 h-6 rounded bg-stone-600 border-2 border-gray-300"></div>
-                  <span class="text-xs font-bold text-stone-600">600 - Stone (#383838)</span>
+                  <div
+                    class="w-6 h-6 rounded bg-stone-600 border-2 border-gray-300"
+                  ></div>
+                  <span class="text-xs font-bold text-stone-600"
+                    >600 - Stone (#383838)</span
+                  >
                 </div>
                 <div class="flex items-center gap-2">
                   <div class="w-6 h-6 rounded bg-stone-700"></div>
@@ -165,19 +191,29 @@
 
             <!-- Neutral -->
             <div class="bg-neutral-100 p-4 rounded-lg">
-              <h3 class="font-semibold mb-3 text-stone-600">Neutral (Gris Personnalisé)</h3>
+              <h3 class="font-semibold mb-3 text-stone-600">
+                Neutral (Gris Personnalisé)
+              </h3>
               <div class="space-y-2">
                 <div class="flex items-center gap-2">
                   <div class="w-6 h-6 rounded bg-neutral-50"></div>
                   <span class="text-xs text-stone-600">50</span>
                 </div>
                 <div class="flex items-center gap-2">
-                  <div class="w-6 h-6 rounded bg-neutral-100 border-2 border-gray-300"></div>
-                  <span class="text-xs font-bold text-stone-600">100 - Sand (#F3EDE7)</span>
+                  <div
+                    class="w-6 h-6 rounded bg-neutral-100 border-2 border-gray-300"
+                  ></div>
+                  <span class="text-xs font-bold text-stone-600"
+                    >100 - Sand (#F3EDE7)</span
+                  >
                 </div>
                 <div class="flex items-center gap-2">
-                  <div class="w-6 h-6 rounded bg-neutral-200 border-2 border-gray-300"></div>
-                  <span class="text-xs font-bold text-stone-600">200 - Grey (#EDEDED)</span>
+                  <div
+                    class="w-6 h-6 rounded bg-neutral-200 border-2 border-gray-300"
+                  ></div>
+                  <span class="text-xs font-bold text-stone-600"
+                    >200 - Grey (#EDEDED)</span
+                  >
                 </div>
                 <div class="flex items-center gap-2">
                   <div class="w-6 h-6 rounded bg-neutral-300"></div>
@@ -217,16 +253,24 @@
             <div class="bg-neutral-100 p-4 rounded-lg">
               <h3 class="font-semibold mb-3 text-stone-600">Arrière-plans</h3>
               <div class="space-y-2">
-                <div class="h-8 rounded bg-brand-400 flex items-center justify-center text-white text-sm">
+                <div
+                  class="h-8 rounded bg-brand-400 flex items-center justify-center text-white text-sm"
+                >
                   bg-brand-400 (Bonsai)
                 </div>
-                <div class="h-8 rounded bg-stone-600 flex items-center justify-center text-white text-sm">
+                <div
+                  class="h-8 rounded bg-stone-600 flex items-center justify-center text-white text-sm"
+                >
                   bg-stone-600 (Stone)
                 </div>
-                <div class="h-8 rounded bg-neutral-100 flex items-center justify-center text-stone-600 text-sm">
+                <div
+                  class="h-8 rounded bg-neutral-100 flex items-center justify-center text-stone-600 text-sm"
+                >
                   bg-neutral-100 (Sand)
                 </div>
-                <div class="h-8 rounded bg-neutral-200 flex items-center justify-center text-stone-600 text-sm">
+                <div
+                  class="h-8 rounded bg-neutral-200 flex items-center justify-center text-stone-600 text-sm"
+                >
                   bg-neutral-200 (Grey)
                 </div>
               </div>
@@ -236,17 +280,18 @@
             <div class="bg-neutral-100 p-4 rounded-lg">
               <h3 class="font-semibold mb-3 text-stone-600">Textes</h3>
               <div class="space-y-2">
-                <div class="text-brand-600 text-sm">text-brand-600 (Semi green)</div>
+                <div class="text-brand-600 text-sm">
+                  text-brand-600 (Semi green)
+                </div>
                 <div class="text-stone-600 text-sm">text-stone-600 (Stone)</div>
                 <div class="text-neutral-600 text-sm">text-neutral-600</div>
-                <div class="text-brand-400 text-sm">text-brand-400 (Bonsai)</div>
+                <div class="text-brand-400 text-sm">
+                  text-brand-400 (Bonsai)
+                </div>
               </div>
             </div>
           </div>
         </div>
-
-
-
 
         <!-- Bouton de test API -->
         <UButton
@@ -259,13 +304,8 @@
           {{ $t('home.fetchDataBtn') }}
         </UButton>
 
-        <UAlert
-          v-if="isError"
-          color="error"
-          variant="soft"
-          class="mb-4"
-        >
-          Erreur: {{ errorMessage || 'Aucun message d\'erreur' }}
+        <UAlert v-if="isError" color="error" variant="soft" class="mb-4">
+          Erreur: {{ errorMessage || "Aucun message d'erreur" }}
         </UAlert>
 
         <!-- Debug info -->
@@ -273,17 +313,16 @@
           Debug - isError: {{ isError }}, errorMessage: "{{ errorMessage }}"
         </div>
 
-        <UCard
-          v-if="data"
-          class="bg-neutral-100 text-left"
-        >
+        <UCard v-if="data" class="bg-neutral-100 text-left">
           <template #header>
             <h3 class="text-xl font-semibold text-stone-600">
               {{ $t('home.apiResponse') }}
             </h3>
           </template>
 
-          <pre class="text-sm overflow-auto max-h-80 bg-neutral-100 p-4 rounded-md text-left text-stone-600">
+          <pre
+            class="text-sm overflow-auto max-h-80 bg-neutral-100 p-4 rounded-md text-left text-stone-600"
+          >
             {{ JSON.stringify(data, null, 2) }}
           </pre>
         </UCard>
@@ -293,11 +332,17 @@
 </template>
 
 <script setup lang="ts">
-import { useGetExampleData } from './composables/useGetExampleData'
+  import { useGetExampleData } from './composables/useGetExampleData'
 
-const { data, isLoading, isError, errorMessage, doRequest: fetchData } = useGetExampleData()
+  const {
+    data,
+    isLoading,
+    isError,
+    errorMessage,
+    doRequest: fetchData,
+  } = useGetExampleData()
 
-const handleFetchData = async () => {
-  await fetchData()
-}
+  const handleFetchData = async () => {
+    await fetchData()
+  }
 </script>

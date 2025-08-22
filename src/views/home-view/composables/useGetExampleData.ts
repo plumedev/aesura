@@ -10,7 +10,7 @@ export function useGetExampleData() {
       const { add } = useToast()
       add({
         title: 'Données récupérées avec succès !',
-        color: 'success'
+        color: 'success',
       })
       return result
     } catch (error: unknown) {
@@ -18,7 +18,7 @@ export function useGetExampleData() {
       if (error instanceof Error) {
         add({
           title: error.message,
-          color: 'error'
+          color: 'error',
         })
       }
       throw error
@@ -26,6 +26,6 @@ export function useGetExampleData() {
   }
 
   return useRequest<IExampleData>({
-    runServices
+    runServices,
   })
 }

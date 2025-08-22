@@ -17,6 +17,6 @@ export const toastStore = defineStore('toastStore', () => {
   return {
     toast,
     setToast,
-    hideToast
+    hideToast,
   }
 })

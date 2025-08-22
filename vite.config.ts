@@ -18,42 +18,31 @@ export default defineConfig({
           neutral: 'neutral',
           success: 'brand',
           warning: 'yellow',
-          error: 'red'
+          error: 'red',
         },
         input: {
-          slots: {
-            root: 'bg-neutral-100 rounded-md',
-            leading: 'text-primary-600',
-            leadingIcon: 'text-primary-600',
-            leadingAvatar: 'text-primary-600',
-            trailing: 'text-primary-600',
-            trailingIcon: 'text-primary-600',
-          },
           defaultVariants: {
             variant: 'soft',
             color: 'primary',
-            size: 'xl'
-          }
+            size: 'xl',
+          },
+          variants: {
+            soft: 'text-highlighted bg-red-50 hover:bg-red-100 focus:bg-red-100 disabled:bg-red-50/50',
+          },
         },
         button: {
           defaultVariants: {
             variant: 'solid',
             size: 'xl',
             color: 'primary',
-          }
+          },
         },
-        link : {
-          base: 'text-brand-700',
-          compoundVariants: [
-            {
-              active: false,
-              disabled: false,
-              class: [
-                'hover:text-default',
-                'transition-colors'
-              ]
-            }
-          ]
+        select: {
+          defaultVariants: {
+            size: 'md',
+            color: 'primary',
+            variant: 'outline',
+          },
         },
       },
       colorMode: false,
@@ -62,31 +51,31 @@ export default defineConfig({
     VueI18nPlugin({
       include: [
         path.resolve(__dirname, './src/assets/locales/**'),
-        path.resolve(__dirname, './src/views/**/locales/*.json')
+        path.resolve(__dirname, './src/views/**/locales/*.json'),
       ],
       strictMessage: false,
-      compositionOnly: true
-    })
+      compositionOnly: true,
+    }),
   ],
   build: {
-    sourcemap: true
+    sourcemap: true,
   },
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
   },
   server: {
-    port: 8080
+    port: 8080,
   },
   preview: {
-    port: 8080
+    port: 8080,
   },
   css: {
     preprocessorOptions: {
       scss: {
-        api: 'modern-compiler'
-      }
-    }
-  }
+        api: 'modern-compiler',
+      },
+    },
+  },
 })

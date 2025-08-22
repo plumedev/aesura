@@ -6,12 +6,11 @@
   "printWidth": 120,
   "trailingComma": "none",
   "endOfLine": "auto",
+  "htmlWhitespaceSensitivity": "strict",
+  "singleAttributePerLine": true,
   "overrides": [
     {
-      "files": [
-        "*.scss",
-        "*.css"
-      ],
+      "files": ["*.scss", "*.css"],
       "options": {
         "singleQuote": false
       }

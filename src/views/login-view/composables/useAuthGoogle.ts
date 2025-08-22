@@ -23,7 +23,7 @@ export function useAuthGoogle() {
 
       add({
         title: `Connexion réussie ! Bienvenue ${user.displayName || user.email}`,
-        color: 'success'
+        color: 'success',
       })
 
       if (authStore.isTutorialActive) {
@@ -31,7 +31,6 @@ export function useAuthGoogle() {
       } else {
         router.push({ name: routeName })
       }
-
     } catch (error: unknown) {
       console.error('Erreur de connexion Google:', error)
 
@@ -54,7 +53,7 @@ export function useAuthGoogle() {
 
       add({
         title: `Erreur de connexion: ${errorMessage}`,
-        color: 'error'
+        color: 'error',
       })
 
       throw error
@@ -64,6 +63,6 @@ export function useAuthGoogle() {
   }
 
   return useRequest<void>({
-    runServices
+    runServices,
   })
 }
