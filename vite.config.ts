@@ -13,44 +13,69 @@ export default defineConfig({
     ui({
       ui: {
         colors: {
-          primary: 'brand',      // Bleu (#60a5fa) - couleur principale
-          secondary: 'stone',    // Rouge (#f87171) - couleur secondaire
-          neutral: 'neutral',    // Gris personnalisé
-          success: 'brand',      // Utilise votre palette brand pour le succès
-          warning: 'yellow',     // Jaune pour les avertissements
-          error: 'red'          // Rouge pour les erreurs
-        }
-      }
+          primary: 'brand',
+          secondary: 'stone',
+          neutral: 'neutral',
+          success: 'brand',
+          warning: 'yellow',
+          error: 'red',
+        },
+        input: {
+          defaultVariants: {
+            variant: 'soft',
+            color: 'primary',
+            size: 'xl',
+          },
+          variants: {
+            soft: 'text-highlighted bg-red-50 hover:bg-red-100 focus:bg-red-100 disabled:bg-red-50/50',
+          },
+        },
+        button: {
+          defaultVariants: {
+            variant: 'solid',
+            size: 'xl',
+            color: 'primary',
+          },
+        },
+        select: {
+          defaultVariants: {
+            size: 'md',
+            color: 'primary',
+            variant: 'outline',
+          },
+        },
+      },
+      colorMode: false,
     }),
     VueDevTools(),
     VueI18nPlugin({
       include: [
         path.resolve(__dirname, './src/assets/locales/**'),
-        path.resolve(__dirname, './src/views/**/locales/*.json')
+        path.resolve(__dirname, './src/views/**/locales/*.json'),
       ],
       strictMessage: false,
-      compositionOnly: true
-    })
+      compositionOnly: true,
+    }),
   ],
   build: {
-    sourcemap: true
+    sourcemap: true,
   },
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
   },
   server: {
-    port: 8080
+    port: 8080,
   },
   preview: {
-    port: 8080
+    port: 8080,
   },
   css: {
     preprocessorOptions: {
       scss: {
-        api: 'modern-compiler'
-      }
-    }
-  }
+        api: 'modern-compiler',
+      },
+    },
+  },
 })

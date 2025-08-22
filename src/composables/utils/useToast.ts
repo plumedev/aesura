@@ -8,20 +8,20 @@ export const defaultToast: Record<TOAST_TYPE, IToast> = {
     showToast: false,
     message: i18n.global.t('base.toast.error'),
     keepWhenPageChange: false,
-    color: 'red'
+    color: 'red',
   },
   [TOAST_TYPE.SUCCESS]: {
     showToast: false,
     message: i18n.global.t('base.toast.success'),
     keepWhenPageChange: false,
-    color: 'green'
+    color: 'green',
   },
   [TOAST_TYPE.WARNING]: {
     showToast: false,
     message: i18n.global.t('base.toast.warning'),
     keepWhenPageChange: false,
-    color: 'orange'
-  }
+    color: 'orange',
+  },
 }
 
 const useToast = () => {
@@ -29,30 +29,39 @@ const useToast = () => {
   const { toast } = storeToRefs(store)
   const { setToast, hideToast } = store
 
-  const displayError = (arg?: { message: string; keepWhenPageChange?: boolean }) => {
+  const displayError = (arg?: {
+    message: string
+    keepWhenPageChange?: boolean
+  }) => {
     hideToast()
     setToast({
       ...defaultToast[TOAST_TYPE.ERROR],
       ...arg,
-      keepWhenPageChange: arg?.keepWhenPageChange ?? false
+      keepWhenPageChange: arg?.keepWhenPageChange ?? false,
     })
   }
 
-  const displaySuccess = (arg?: { message: string; keepWhenPageChange?: boolean }) => {
+  const displaySuccess = (arg?: {
+    message: string
+    keepWhenPageChange?: boolean
+  }) => {
     hideToast()
     setToast({
       ...defaultToast[TOAST_TYPE.SUCCESS],
       ...arg,
-      keepWhenPageChange: arg?.keepWhenPageChange ?? false
+      keepWhenPageChange: arg?.keepWhenPageChange ?? false,
     })
   }
 
-  const displayWarning = (arg?: { message: string; keepWhenPageChange?: boolean }) => {
+  const displayWarning = (arg?: {
+    message: string
+    keepWhenPageChange?: boolean
+  }) => {
     hideToast()
     setToast({
       ...defaultToast[TOAST_TYPE.WARNING],
       ...arg,
-      keepWhenPageChange: arg?.keepWhenPageChange ?? false
+      keepWhenPageChange: arg?.keepWhenPageChange ?? false,
     })
   }
 
@@ -60,7 +69,7 @@ const useToast = () => {
     toast,
     displayError,
     displaySuccess,
-    displayWarning
+    displayWarning,
   }
 }
 export default useToast

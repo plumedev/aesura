@@ -36,7 +36,7 @@ export const useExampleStore = defineStore('example', () => {
   }
 
   const removeUser = (id: number) => {
-    const index = users.value.findIndex(user => user.id === id)
+    const index = users.value.findIndex((user) => user.id === id)
     if (index > -1) {
       users.value.splice(index, 1)
     }
@@ -67,6 +67,6 @@ export const useExampleStore = defineStore('example', () => {
     addUser,
     removeUser,
     setCurrentUser,
-    clearUsers
+    clearUsers,
   }
 })
