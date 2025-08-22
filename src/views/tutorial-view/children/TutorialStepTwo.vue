@@ -27,18 +27,14 @@
 </template>
 
 <script setup lang="ts">
-  import { onMounted, ref } from 'vue'
-  import { h, resolveComponent } from 'vue'
+  import TransactionForm from '@/components/shared/TransactionForm.vue'
+  import { useDeleteDoc } from '@/composables/firebase/useDeleteDoc'
+  import { useGetTransactions } from '@/composables/firebase/useGetTransactions'
+  import { db } from '@/plugins/firebase'
   import type { TableColumn } from '@nuxt/ui'
   import type { Row } from '@tanstack/vue-table'
   import { collection, type DocumentData } from 'firebase/firestore'
-  import { db } from '@/plugins/firebase'
-  import {
-    useGetTransactions,
-    type Transaction,
-  } from '@/composables/firebase/useGetTransactions'
-  import { useDeleteDoc } from '@/composables/firebase/useDeleteDoc'
-  import TransactionForm from '@/components/shared/TransactionForm.vue'
+  import { h, onMounted, resolveComponent } from 'vue'
 
   const UButton = resolveComponent('UButton')
   const UBadge = resolveComponent('UBadge')

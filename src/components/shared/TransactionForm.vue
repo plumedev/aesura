@@ -84,7 +84,6 @@
     isLoading: isCreating,
     isError,
     errorMessage,
-    isSuccess,
   } = useCreateTransaction()
   const { add: addToast } = useToast()
 

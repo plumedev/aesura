@@ -49,13 +49,13 @@
 
 <script setup lang="ts">
   import type { StepperItem } from '@nuxt/ui'
-  import { ref, onMounted, watch } from 'vue'
-  import { useRoute, useRouter } from 'vue-router'
-  import TutorialStepOne from './children/TutorialStepOne.vue'
-  import TutorialStepTwo from './children/TutorialStepTwo.vue'
-  import TutorialStepThree from './children/TutorialStepThree.vue'
-  import ProgressStep from './children/ProgressStep.vue'
+  import { onMounted, ref } from 'vue'
+  import { useRouter } from 'vue-router'
   import NavigationStep from './children/NavigationStep.vue'
+  import ProgressStep from './children/ProgressStep.vue'
+  import TutorialStepOne from './children/TutorialStepOne.vue'
+  import TutorialStepThree from './children/TutorialStepThree.vue'
+  import TutorialStepTwo from './children/TutorialStepTwo.vue'
 
   // Props pour recevoir le paramètre step depuis la route
   interface Props {
@@ -63,7 +63,6 @@
   }
 
   const props = defineProps<Props>()
-  const route = useRoute()
   const router = useRouter()
   const currentStep = ref(0)
 

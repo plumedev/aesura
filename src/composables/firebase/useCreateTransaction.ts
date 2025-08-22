@@ -1,6 +1,6 @@
-import { collection, type CollectionReference } from 'firebase/firestore'
-import { db } from '@/plugins/firebase'
 import { useAddDoc } from '@/composables/firebase/useAddDoc'
+import { db } from '@/plugins/firebase'
+import { collection } from 'firebase/firestore'
 
 // Interface pour les données de transaction
 export interface TransactionData {

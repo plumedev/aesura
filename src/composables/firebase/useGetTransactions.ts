@@ -1,5 +1,5 @@
-import { collection, type CollectionReference } from 'firebase/firestore'
 import { useGetDocs } from '@/composables/firebase/useGetDocs'
+import { type CollectionReference } from 'firebase/firestore'
 
 // Interface pour les transactions
 export interface Transaction {
