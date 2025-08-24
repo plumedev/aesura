@@ -68,11 +68,8 @@ export function useCreateTransaction() {
         firebaseData
       )
 
-      console.log('Transaction créée avec succès:', newTransaction)
-
       return newTransaction as Transaction
     } catch (error) {
-      console.error('Erreur lors de la création de la transaction:', error)
       throw error
     }
   }

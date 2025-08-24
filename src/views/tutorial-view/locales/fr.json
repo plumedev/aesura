@@ -36,6 +36,22 @@
         "expenseAccount": "Compte prélevé",
         "addExpense": "Ajouter une dépense"
       }
+    },
+    "stepThree": {
+      "title": "Listez vos revenus récurrents",
+      "description": "Maintenant, listez vos revenus récurrents (Salaire, allocations, revenus locatifs, intérêts...) pour avoir une vue complète de votre budget mensuel.",
+      "form": {
+        "type": {
+          "hebdomadaire": "Hebdomadaire",
+          "mensuel": "Mensuel",
+          "quotidien": "Quotidien"
+        },
+        "incomeName": "ex: Salaire",
+        "incomeAmount": "Montant €",
+        "incomeData": "Date de réception",
+        "incomeAccount": "Compte crédité",
+        "addIncome": "Ajouter un revenu"
+      }
     }
   },
   "progress": {

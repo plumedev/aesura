@@ -22,7 +22,4 @@
 
   // Injection du service pour les composants enfants
   provide('notificationService', notificationService)
-
-  // Exemple d'initialisation au montage
-  console.log('ExampleProvider initialisé - Service de notification disponible')
 </script>

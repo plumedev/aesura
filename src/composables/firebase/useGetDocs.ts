@@ -4,15 +4,16 @@ import {
   type CollectionReference,
   type DocumentData,
   type QuerySnapshot,
+  type Query,
 } from 'firebase/firestore'
 
 export function useGetDocs() {
   const runServices = async (
-    collectionRef: CollectionReference
+    collectionRef: CollectionReference | Query
   ): Promise<DocumentData[]> => {
     try {
       if (!collectionRef) {
-        throw new Error('Référence de collection invalide')
+        throw new Error('Référence de collection ou requête invalide')
       }
 
       const querySnapshot: QuerySnapshot = await getDocs(collectionRef)

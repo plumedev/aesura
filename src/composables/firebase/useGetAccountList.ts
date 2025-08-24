@@ -40,8 +40,6 @@ export function useGetAccountList() {
         if (!a.isMainAccount && b.isMainAccount) return 1
         return 0
       })
-
-      console.log('Comptes triés:', sortedAccounts)
       return sortedAccounts
     } catch (error) {
       console.error(
