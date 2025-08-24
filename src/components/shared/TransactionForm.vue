@@ -7,14 +7,29 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <UInput
           v-model="transactionName"
-          :placeholder="$t('tutorial.stepTwo.form.expenseName')"
+          :placeholder="
+            props.type === TransactionType.INCOME
+              ? $t('tutorial.stepThree.form.incomeName')
+              : $t('tutorial.stepTwo.form.expenseName')
+          "
           variant="outline"
           required
-          icon="i-lucide-banknote-arrow-down"
+          :icon="
+            props.type === TransactionType.INCOME
+              ? 'i-lucide-banknote-arrow-up'
+              : 'i-lucide-banknote-arrow-down'
+          "
         />
         <UInput
           v-model="transactionAmount"
-          :placeholder="$t('tutorial.stepTwo.form.expenseAmount')"
+          :placeholder="
+            props.type === TransactionType.INCOME
+              ? $t('tutorial.stepThree.form.incomeAmount')
+              : $t('tutorial.stepTwo.form.expenseAmount')
+          "
+          type="number"
+          step="0.01"
+          :min="props.type === TransactionType.INCOME ? '0' : undefined"
           variant="outline"
           required
           icon="i-lucide-euro"
@@ -27,7 +42,11 @@
         />
         <USelect
           v-model="accountUse"
-          :placeholder="$t('tutorial.stepTwo.form.expenseAccount')"
+          :placeholder="
+            props.type === TransactionType.INCOME
+              ? $t('tutorial.stepThree.form.incomeAccount')
+              : $t('tutorial.stepTwo.form.expenseAccount')
+          "
           variant="outline"
           required
           icon="i-lucide-piggy-bank"
@@ -44,7 +63,11 @@
           :disabled="!isFormValid || isCreating"
         >
           {{
-            isCreating ? 'Création...' : $t('tutorial.stepTwo.form.addExpense')
+            isCreating
+              ? 'Création...'
+              : props.type === TransactionType.INCOME
+                ? $t('tutorial.stepThree.form.addIncome')
+                : $t('tutorial.stepTwo.form.addExpense')
           }}
         </UButton>
       </div>
@@ -74,6 +97,19 @@
     type TransactionData,
   } from '@/composables/firebase/useCreateTransaction'
   import type { TabsItem } from '@nuxt/ui'
+  import {
+    TransactionType,
+    type TransactionTypeValue,
+  } from '@/types/transaction'
+
+  // Props
+  interface Props {
+    type?: TransactionTypeValue
+  }
+
+  const props = withDefaults(defineProps<Props>(), {
+    type: TransactionType.EXPENSE,
+  })
 
   const { t } = useI18n()
 
@@ -128,9 +164,10 @@
 
   // Collecte des données du formulaire
   const collectFormData = (): TransactionData => {
-    // Déterminer le type de transaction basé sur le montant
+    // Utiliser le type défini par la prop
     const amount = Number(transactionAmount.value)
-    const type = amount >= 0 ? 'income' : 'expense'
+    const finalAmount =
+      props.type === TransactionType.INCOME ? Math.abs(amount) : amount
 
     // Déterminer la fréquence basée sur l'onglet actif
     const frequencyMap = {
@@ -141,8 +178,8 @@
 
     return {
       name: transactionName.value.trim(),
-      amount: amount,
-      type: type,
+      amount: finalAmount,
+      type: props.type, // Utiliser la prop
       date: new Date(transactionDate.value),
       accountId: accountUse.value,
       frequency: frequencyMap[activeTab.value as keyof typeof frequencyMap] as
@@ -172,19 +209,19 @@
 
     try {
       const formData = collectFormData()
-      console.log('Données collectées:', formData)
 
       // Créer la transaction avec le composable
-      const newTransaction = await createTransaction(formData)
-
-      console.log('Transaction créée:', newTransaction)
+      await createTransaction(formData)
 
       // Réinitialiser le formulaire après succès
       resetForm()
 
       // Toast de succès
       addToast({
-        title: 'Transaction créée avec succès !',
+        title:
+          props.type === TransactionType.INCOME
+            ? 'Revenu créé avec succès !'
+            : 'Dépense créée avec succès !',
         color: 'success',
         icon: 'i-lucide-check-circle',
       })

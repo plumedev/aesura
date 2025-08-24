@@ -8,7 +8,7 @@
       {{ $t('tutorial.stepTwo.description') }}
     </p>
 
-    <TransactionForm />
+    <TransactionForm :type="TransactionType.EXPENSE" />
 
     <div class="w-full space-y-4 pb-4">
       <div class="flex flex-col justify-center pt-4">
@@ -31,13 +31,13 @@
   import { useDeleteDoc } from '@/composables/firebase/useDeleteDoc'
   import { useGetTransactions } from '@/composables/firebase/useGetTransactions'
   import { db } from '@/plugins/firebase'
+  import { TransactionType } from '@/types/transaction'
   import type { TableColumn } from '@nuxt/ui'
   import type { Row } from '@tanstack/vue-table'
   import { collection, type DocumentData } from 'firebase/firestore'
   import { h, onMounted, resolveComponent } from 'vue'
 
   const UButton = resolveComponent('UButton')
-  const UBadge = resolveComponent('UBadge')
   const UDropdownMenu = resolveComponent('UDropdownMenu')
 
   const transactionsCollectionRef = collection(db, 'transactions')
@@ -48,9 +48,11 @@
 
   const deleteTransaction = async (transactionId: string) => {
     await deleteTransactionRequest(transactionsCollectionRef, transactionId)
-    await getTransactions(transactionsCollectionRef)
+    await getTransactions(transactionsCollectionRef, {
+      type: TransactionType.EXPENSE,
+    })
     toast.add({
-      title: 'Transaction supprimée avec succès',
+      title: 'Dépense supprimée avec succès',
       color: 'success',
       icon: 'i-lucide-trash-2',
     })
@@ -67,38 +69,15 @@
       header: 'Montant',
       cell: ({ row }) => {
         const amount = row.getValue('amount') as number
-        const type = row.getValue('type') as string
-        const color = type === 'income' ? 'success' : 'error'
-        const icon =
-          type === 'income' ? 'i-lucide-arrow-up' : 'i-lucide-arrow-down'
 
         return h('div', { class: 'flex items-center gap-2' }, [
           h(
             'span',
-            { class: `text-${color}-600 font-semibold` },
-            `${amount > 0 ? '+' : ''}${amount.toFixed(2)} €`
+            { class: 'text-error-600 font-semibold' },
+            `-${Math.abs(amount).toFixed(2)} €`
           ),
-          h('i', { class: icon }),
+          h('i', { class: 'i-lucide-arrow-down' }),
         ])
-      },
-    },
-    {
-      accessorKey: 'type',
-      header: 'Type',
-      cell: ({ row }) => {
-        const type = row.getValue('type') as string
-        const color = type === 'income' ? 'success' : 'error'
-        const label = type === 'income' ? 'Revenu' : 'Dépense'
-
-        return h(
-          UBadge,
-          {
-            class: 'capitalize',
-            variant: 'subtle',
-            color: color,
-          },
-          () => label
-        )
       },
     },
     {
@@ -159,7 +138,7 @@
   const getRowItems = (row: Row<DocumentData>) => {
     return [
       {
-        label: 'Supprimer la transaction',
+        label: 'Supprimer la dépense',
         icon: 'i-lucide-trash',
         onSelect() {
           if (row.original.id) {
@@ -171,6 +150,8 @@
   }
 
   onMounted(async () => {
-    await getTransactions(transactionsCollectionRef)
+    await getTransactions(transactionsCollectionRef, {
+      type: TransactionType.EXPENSE,
+    })
   })
 </script>

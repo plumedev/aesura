@@ -1,5 +1,11 @@
 import { useGetDocs } from '@/composables/firebase/useGetDocs'
-import { type CollectionReference } from 'firebase/firestore'
+import { type CollectionReference, query, where } from 'firebase/firestore'
+import { TransactionType } from '@/types/transaction'
+
+// Interface pour les options de filtrage
+export interface TransactionFilters {
+  type?: TransactionType
+}
 
 // Interface pour les transactions
 export interface Transaction {
@@ -24,10 +30,23 @@ export function useGetTransactions() {
   } = useGetDocs()
 
   const getTransactions = async (
-    collectionRef: CollectionReference
+    collectionRef: CollectionReference,
+    filters?: TransactionFilters
   ): Promise<Transaction[]> => {
     try {
-      const transactions = await doRequest(collectionRef)
+      // Construire la requête avec les filtres
+      let transactions
+
+      // Filtre par type uniquement
+      if (filters?.type) {
+        const filteredQuery = query(
+          collectionRef,
+          where('type', '==', filters.type)
+        )
+        transactions = await doRequest(filteredQuery)
+      } else {
+        transactions = await doRequest(collectionRef)
+      }
 
       if (!transactions || !Array.isArray(transactions)) {
         return []
@@ -58,8 +77,6 @@ export function useGetTransactions() {
       const sortedTransactions = formattedTransactions.sort((a, b) => {
         return new Date(b.date).getTime() - new Date(a.date).getTime()
       })
-
-      console.log('Transactions récupérées:', sortedTransactions)
       return sortedTransactions
     } catch (error) {
       console.error('Erreur lors de la récupération des transactions:', error)
