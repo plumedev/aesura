@@ -4,7 +4,7 @@ import {
   type CollectionReference,
   type DocumentData,
 } from 'firebase/firestore'
-import { handleEntityFirebaseError } from '@/helpers/firebaseError.helper'
+import { handleFirebaseError } from '@/helpers/firebaseError.helper'
 
 export function useAddDoc() {
   const runServices = async (
@@ -29,7 +29,7 @@ export function useAddDoc() {
 
       return newDocument
     } catch (error) {
-      throw handleEntityFirebaseError(
+      throw handleFirebaseError(
         error,
         "l'ajout du document",
         'le document'

@@ -2,7 +2,7 @@ import { useRequest } from '../utils/useRequest'
 import { doc, updateDoc } from 'firebase/firestore'
 import { db } from '@/plugins/firebase'
 import { useAuthStore } from '@/stores/authStore'
-import { handleEntityFirebaseError } from '@/helpers/firebaseError.helper'
+import { handleFirebaseError } from '@/helpers/firebaseError.helper'
 
 export function useSetTutorialStatus() {
   const runServices = async (activate: boolean): Promise<boolean> => {
@@ -21,14 +21,13 @@ export function useSetTutorialStatus() {
         updatedAt: new Date(),
       })
 
-      // Mettre à jour le store local pour la cohérence
       if (authStore.user) {
         authStore.user.isTutorialActive = activate
       }
 
       return true
     } catch (error) {
-      throw handleEntityFirebaseError(
+      throw handleFirebaseError(
         error,
         `la ${activate ? 'activation' : 'désactivation'} du tutoriel`,
         "l'utilisateur"

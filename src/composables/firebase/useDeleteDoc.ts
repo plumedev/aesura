@@ -5,7 +5,7 @@ import {
   getDoc,
   type CollectionReference,
 } from 'firebase/firestore'
-import { handleEntityFirebaseError } from '@/helpers/firebaseError.helper'
+import { handleFirebaseError } from '@/helpers/firebaseError.helper'
 
 export function useDeleteDoc() {
   const runServices = async (
@@ -32,7 +32,7 @@ export function useDeleteDoc() {
 
       return true
     } catch (error) {
-      throw handleEntityFirebaseError(
+      throw handleFirebaseError(
         error,
         'la suppression du document',
         'le document'

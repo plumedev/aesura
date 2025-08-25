@@ -7,7 +7,7 @@ import {
   where,
   type CollectionReference,
 } from 'firebase/firestore'
-import { handleEntityFirebaseError } from '@/helpers/firebaseError.helper'
+import { handleFirebaseError } from '@/helpers/firebaseError.helper'
 
 export function useDefineMainAccount() {
   const runServices = async (
@@ -43,7 +43,7 @@ export function useDefineMainAccount() {
 
       return true
     } catch (error) {
-      throw handleEntityFirebaseError(
+      throw handleFirebaseError(
         error,
         'la définition du compte principal',
         'le compte'

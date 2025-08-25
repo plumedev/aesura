@@ -40,7 +40,7 @@
       <TutorialStepTwo v-if="currentStep === 1" />
       <TutorialStepThree v-if="currentStep === 2" />
       <TutorialStepResume v-if="currentStep === 3" />
-      <!-- Navigation entre les étapes -->
+
       <NavigationStep
         :total-step="3"
         :current-step="currentStep"
@@ -52,23 +52,17 @@
 </template>
 
 <script setup lang="ts">
+  import { useSetTutorialStatus } from '@/composables/firebase/useSetTutorialStatus'
   import type { StepperItem } from '@nuxt/ui'
   import { onMounted, ref } from 'vue'
   import { useRouter } from 'vue-router'
   import NavigationStep from './children/NavigationStep.vue'
   import ProgressStep from './children/ProgressStep.vue'
   import TutorialStepOne from './children/TutorialStepOne.vue'
+  import TutorialStepResume from './children/TutorialStepResume.vue'
   import TutorialStepThree from './children/TutorialStepThree.vue'
   import TutorialStepTwo from './children/TutorialStepTwo.vue'
-  import TutorialStepResume from './children/TutorialStepResume.vue'
-  import { useSetTutorialStatus } from '@/composables/firebase/useSetTutorialStatus'
-  import { useAuthStore } from '@/stores/authStore'
-  import { collection } from 'firebase/firestore'
-  import { db } from '@/plugins/firebase'
 
-  const authStore = useAuthStore()
-
-  // Props pour recevoir le paramètre step depuis la route
   interface Props {
     step?: string
   }
@@ -106,45 +100,38 @@
   ])
 
   const handleFinishTutorial = () => {
-    // Passer à l'étape de résumé (étape 3)
     currentStep.value = 3
     if (currentStep.value === 3) {
-      // Désactiver le tutoriel (le marquer comme terminé)
       updateTutorialStatus(false)
       router.push({ name: 'home' })
     }
   }
 
-  // Mapping des étapes vers les paramètres d'URL
-  const stepMapping = {
+  const stepMappingUrl = {
     0: 'accounts',
     1: 'expenses',
     2: 'revenues',
     3: 'resume',
   }
 
-  // Fonction pour initialiser l'étape depuis l'URL
   const initializeStepFromUrl = () => {
     if (props.step) {
-      // Si on a un paramètre step dans l'URL, l'utiliser
       const stepParam = props.step
-      const stepIndex = Object.values(stepMapping).indexOf(stepParam)
+      const stepIndex = Object.values(stepMappingUrl).indexOf(stepParam)
       if (stepIndex !== -1) {
         currentStep.value = stepIndex
       }
     }
   }
 
-  // Fonction pour gérer les changements d'étape et mettre à jour l'URL
   const handleStepChange = (step: number) => {
     currentStep.value = step
-    const stepParam = stepMapping[step as keyof typeof stepMapping]
+    const stepParam = stepMappingUrl[step as keyof typeof stepMappingUrl]
     if (stepParam) {
       router.push({ name: 'tutorial-step', params: { step: stepParam } })
     }
   }
 
-  // Initialiser l'étape au montage du composant
   onMounted(() => {
     initializeStepFromUrl()
   })

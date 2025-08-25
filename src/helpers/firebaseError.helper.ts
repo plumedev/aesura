@@ -10,16 +10,23 @@ export interface FirebaseErrorContext {
 
 /**
  * Gère les erreurs Firebase et retourne des messages d'erreur contextualisés
+ *
+ * @param error - L'erreur à traiter
+ * @param action - L'action qui a échoué (ex: "la récupération des documents")
+ * @param entity - L'entité concernée (optionnel, ex: "la collection")
+ * @param operation - L'opération spécifique (optionnel, ex: "lecture")
+ * @returns Error avec message contextualisé
  */
 export const handleFirebaseError = (
   error: unknown,
-  context: FirebaseErrorContext
+  action: string,
+  entity?: string,
+  operation?: string
 ): Error => {
-  if (error instanceof Error) {
-    const { action, entity, operation } = context
-    const entityText = entity ? ` pour ${entity}` : ''
-    const operationText = operation ? ` (${operation})` : ''
+  const entityText = entity ? ` pour ${entity}` : ''
+  const operationText = operation ? ` (${operation})` : ''
 
+  if (error instanceof Error) {
     switch (true) {
       case error.message.includes('permission-denied'):
         return new Error(
@@ -74,39 +81,6 @@ export const handleFirebaseError = (
   }
 
   return new Error(
-    `Erreur lors de ${context.action}${context.entity ? ` pour ${context.entity}` : ''}: Erreur inconnue`
+    `Erreur lors de ${action}${entityText}: Erreur inconnue${operationText}`
   )
-}
-
-/**
- * Gestion d'erreur simple sans contexte détaillé
- */
-export const handleSimpleFirebaseError = (
-  error: unknown,
-  action: string
-): Error => {
-  return handleFirebaseError(error, { action })
-}
-
-/**
- * Gestion d'erreur avec contexte d'entité
- */
-export const handleEntityFirebaseError = (
-  error: unknown,
-  action: string,
-  entity: string
-): Error => {
-  return handleFirebaseError(error, { action, entity })
-}
-
-/**
- * Gestion d'erreur complète avec tous les contextes
- */
-export const handleFullFirebaseError = (
-  error: unknown,
-  action: string,
-  entity: string,
-  operation: string
-): Error => {
-  return handleFirebaseError(error, { action, entity, operation })
 }

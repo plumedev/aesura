@@ -6,7 +6,7 @@ import {
   type QuerySnapshot,
   type Query,
 } from 'firebase/firestore'
-import { handleEntityFirebaseError } from '@/helpers/firebaseError.helper'
+import { handleFirebaseError } from '@/helpers/firebaseError.helper'
 
 export function useGetDocs() {
   const runServices = async (
@@ -29,7 +29,7 @@ export function useGetDocs() {
 
       return documents
     } catch (error) {
-      throw handleEntityFirebaseError(
+      throw handleFirebaseError(
         error,
         'la récupération des documents',
         'la collection'

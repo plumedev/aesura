@@ -1,89 +1,80 @@
-import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
-import vue from '@vitejs/plugin-vue'
-import { fileURLToPath, URL } from 'node:url'
-import path from 'path'
-import { defineConfig } from 'vite'
-import VueDevTools from 'vite-plugin-vue-devtools'
-import ui from '@nuxt/ui/vite'
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite';
+import vue from '@vitejs/plugin-vue';
+import { fileURLToPath, URL } from 'node:url';
+import path from 'path';
+import { defineConfig } from 'vite';
+import VueDevTools from 'vite-plugin-vue-devtools';
+import ui from '@nuxt/ui/vite';
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    vue(),
-    ui({
-      ui: {
-        colors: {
-          primary: 'brand', // Bleu (#60a5fa) - couleur principale
-          secondary: 'stone', // Rouge (#f87171) - couleur secondaire
-          neutral: 'neutral', // Gris personnalisé
-          success: 'brand', // Utilise votre palette brand pour le succès
-          warning: 'yellow', // Jaune pour les avertissements
-          error: 'red', // Rouge pour les erreurs
-        },
-        input: {
-          slots: {
-            root: 'bg-neutral-100 rounded-md',
-            base: 'rounded-md hover:bg-neutral-600',
-            leading: 'text-primary-600',
-            leadingIcon: 'text-primary-600',
-            leadingAvatar: 'text-primary-600',
-            trailing: 'text-primary-600',
-            trailingIcon: 'text-primary-600',
-          },
-          defaultVariants: {
-            variant: 'soft',
-            color: 'primary',
-            size: 'xl',
-          },
-        },
-        button: {
-          defaultVariants: {
-            variant: 'solid',
-            size: 'xl',
-            color: 'primary',
-          },
-        },
-        link: {
-          base: 'text-brand-700',
-          compoundVariants: [
-            {
-              active: false,
-              disabled: false,
-              class: ['hover:text-default', 'transition-colors'],
+    plugins: [
+        vue(),
+        ui({
+            ui: {
+                colors: {
+                    primary: 'brand',
+                    secondary: 'stone',
+                    neutral: 'neutral',
+                    success: 'brand',
+                    warning: 'yellow',
+                    error: 'red',
+                },
+                input: {
+                    defaultVariants: {
+                        variant: 'soft',
+                        color: 'primary',
+                        size: 'xl',
+                    },
+                    variants: {
+                        soft: 'text-highlighted bg-red-50 hover:bg-red-100 focus:bg-red-100 disabled:bg-red-50/50',
+                    },
+                },
+                button: {
+                    defaultVariants: {
+                        variant: 'solid',
+                        size: 'xl',
+                        color: 'primary',
+                    },
+                },
+                select: {
+                    defaultVariants: {
+                        size: 'md',
+                        color: 'primary',
+                        variant: 'outline',
+                    },
+                },
             },
-          ],
+            colorMode: false,
+        }),
+        VueDevTools(),
+        VueI18nPlugin({
+            include: [
+                path.resolve(__dirname, './src/assets/locales/**'),
+                path.resolve(__dirname, './src/views/**/locales/*.json'),
+            ],
+            strictMessage: false,
+            compositionOnly: true,
+        }),
+    ],
+    build: {
+        sourcemap: true,
+    },
+    resolve: {
+        alias: {
+            '@': fileURLToPath(new URL('./src', import.meta.url)),
         },
-      },
-      colorMode: false,
-    }),
-    VueDevTools(),
-    VueI18nPlugin({
-      include: [
-        path.resolve(__dirname, './src/assets/locales/**'),
-        path.resolve(__dirname, './src/views/**/locales/*.json'),
-      ],
-      strictMessage: false,
-      compositionOnly: true,
-    }),
-  ],
-  build: {
-    sourcemap: true,
-  },
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
-  },
-  server: {
-    port: 8080,
-  },
-  preview: {
-    port: 8080,
-  },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        api: 'modern-compiler',
-      },
+    server: {
+        port: 8080,
     },
-  },
-})
+    preview: {
+        port: 8080,
+    },
+    css: {
+        preprocessorOptions: {
+            scss: {
+                api: 'modern-compiler',
+            },
+        },
+    },
+});
