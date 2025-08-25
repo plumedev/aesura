@@ -52,6 +52,16 @@
         "incomeAccount": "Compte crédité",
         "addIncome": "Ajouter un revenu"
       }
+    },
+    "stepResume": {
+      "title": "Résumé de situation",
+      "description": "Voici une vue d'ensemble de vos dépenses, revenus et de votre balance pour le mois en cours. Prenez le temps de consulter ces informations pour mieux comprendre votre situation financière actuelle et planifier vos prochaines étapes budgétaires.",
+      "form": {
+        "income": "Revenus",
+        "expense": "Dépenses",
+        "total": "Reste à vivre",
+        "loading": "Chargement..."
+      }
     }
   },
   "progress": {

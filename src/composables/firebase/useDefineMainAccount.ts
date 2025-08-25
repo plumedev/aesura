@@ -7,6 +7,7 @@ import {
   where,
   type CollectionReference,
 } from 'firebase/firestore'
+import { handleFirebaseError } from '@/helpers/firebaseError.helper'
 
 export function useDefineMainAccount() {
   const runServices = async (
@@ -42,44 +43,10 @@ export function useDefineMainAccount() {
 
       return true
     } catch (error) {
-      if (error instanceof Error) {
-        switch (true) {
-          case error.message.includes('permission-denied'):
-            throw new Error(
-              'Accès refusé à la collection. Vérifiez vos permissions Firebase.'
-            )
-
-          case error.message.includes('not-found'):
-            throw new Error("Compte introuvable. Vérifiez l'ID du compte.")
-
-          case error.message.includes('unavailable'):
-            throw new Error(
-              'Service Firebase temporairement indisponible. Veuillez réessayer.'
-            )
-
-          case error.message.includes('unauthenticated'):
-            throw new Error(
-              'Vous devez être authentifié pour modifier des comptes.'
-            )
-
-          case error.message.includes('network'):
-            throw new Error(
-              'Erreur de connexion réseau. Vérifiez votre connexion internet.'
-            )
-
-          case error.message.includes('invalid-argument'):
-            throw new Error('ID du compte invalide.')
-
-          default:
-            throw new Error(
-              'Erreur lors de la définition du compte principal: ' +
-                error.message
-            )
-        }
-      }
-
-      throw new Error(
-        'Erreur lors de la définition du compte principal: Erreur inconnue'
+      throw handleFirebaseError(
+        error,
+        'la définition du compte principal',
+        'le compte'
       )
     }
   }

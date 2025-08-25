@@ -46,7 +46,10 @@ export const useAuthStore = defineStore('auth', () => {
         const userData = userDoc.data()
         user.value = {
           ...user.value!,
-          isTutorialActive: userData.isTutorialActive ?? true,
+          isTutorialActive:
+            userData.isTutorialActive !== undefined
+              ? userData.isTutorialActive
+              : true,
         }
       } else {
         await setDoc(userDocRef, {
