@@ -65,6 +65,7 @@
   const UDropdownMenu = resolveComponent('UDropdownMenu')
 
   const accountsCollectionRef = collection(db, 'accounts')
+  console.log('accountsCollectionRef', accountsCollectionRef)
 
   const toast = useToast()
   const { data: accountsData, isLoading, doRequest: getAccounts } = useGetDocs()

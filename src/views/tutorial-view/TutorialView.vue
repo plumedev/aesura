@@ -31,11 +31,15 @@
     </div>
 
     <div id="stepper-content" class="flex flex-col w-full p-4 py-4 m-4 ms-0">
-      <ProgressStep :total-step="3" :current-step="currentStep" />
+      <ProgressStep
+        v-if="currentStep !== 3"
+        :total-step="3"
+        :current-step="currentStep"
+      />
       <TutorialStepOne v-if="currentStep === 0" />
       <TutorialStepTwo v-if="currentStep === 1" />
       <TutorialStepThree v-if="currentStep === 2" />
-
+      <TutorialStepResume v-if="currentStep === 3" />
       <!-- Navigation entre les étapes -->
       <NavigationStep
         :total-step="3"
@@ -56,6 +60,13 @@
   import TutorialStepOne from './children/TutorialStepOne.vue'
   import TutorialStepThree from './children/TutorialStepThree.vue'
   import TutorialStepTwo from './children/TutorialStepTwo.vue'
+  import TutorialStepResume from './children/TutorialStepResume.vue'
+  import { useSetTutorialStatus } from '@/composables/firebase/useSetTutorialStatus'
+  import { useAuthStore } from '@/stores/authStore'
+  import { collection } from 'firebase/firestore'
+  import { db } from '@/plugins/firebase'
+
+  const authStore = useAuthStore()
 
   // Props pour recevoir le paramètre step depuis la route
   interface Props {
@@ -65,6 +76,8 @@
   const props = defineProps<Props>()
   const router = useRouter()
   const currentStep = ref(0)
+
+  const { doRequest: updateTutorialStatus } = useSetTutorialStatus()
 
   const items = ref<StepperItem[]>([
     {
@@ -84,13 +97,22 @@
       description: 'Listez vos revenus récurrents comme votre salaire.',
       icon: 'i-lucide-list-plus',
     },
+    {
+      title: 'Résumé et finalisation',
+      description:
+        'Récapitulatif de votre configuration et finalisation du tutoriel.',
+      icon: 'i-lucide-check-circle',
+    },
   ])
 
   const handleFinishTutorial = () => {
-    // TODO: Implémenter la logique de fin du tutoriel
-    console.log('Tutoriel terminé !')
-    // Exemple : redirection vers la page d'accueil
-    // navigateTo('/')
+    // Passer à l'étape de résumé (étape 3)
+    currentStep.value = 3
+    if (currentStep.value === 3) {
+      // Désactiver le tutoriel (le marquer comme terminé)
+      updateTutorialStatus(false)
+      router.push({ name: 'home' })
+    }
   }
 
   // Mapping des étapes vers les paramètres d'URL
@@ -98,6 +120,7 @@
     0: 'accounts',
     1: 'expenses',
     2: 'revenues',
+    3: 'resume',
   }
 
   // Fonction pour initialiser l'étape depuis l'URL

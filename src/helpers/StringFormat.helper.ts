@@ -24,3 +24,13 @@ export const truncate = (str: string, length: number): string => {
 export const normalizeSpaces = (str: string): string => {
   return str.trim().replace(/\s+/g, ' ')
 }
+
+/**
+ * Formate un montant en devise européenne (EUR)
+ */
+export const formatCurrency = (amount: number): string => {
+  return new Intl.NumberFormat('fr-FR', {
+    style: 'currency',
+    currency: 'EUR',
+  }).format(amount)
+}
